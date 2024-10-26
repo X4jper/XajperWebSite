@@ -1,137 +1,163 @@
-body {
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+*{
     margin: 0;
-    background-color: #f4f4f4;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-.containerkopiuj {
-    --color: #a5a5b0;
-    --size: 30px;
+body{
     display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: center;
-    position: relative;
-    cursor: pointer;
-    font-size: var(--size);
-    user-select: none;
-    fill: var(--color);
-    margin-right: 10px;
-    right: -10px;
-  }
-  
-  .containerkopiuj .clipboard {
-    position: absolute;
-    animation: keyframes-fill .5s;
-  }
-  
-  .containerkopiuj .clipboard-check {
-    position: absolute;
-    display: none;
-    animation: keyframes-fill .5s;
-  }
+    min-height: 100vh;
+    background: #f4f4f4;
+}
 
-  .containerkopiuj input:checked ~ .clipboard {
-    display: none;
-  }
-  
-  .containerkopiuj input:checked ~ .clipboard-check {
-    display: block;
-  }
-
-  .containerkopiuj input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-
-  @keyframes keyframes-fill {
-    0% {
-      transform: rotate(0deg) scale(0);
-      opacity: 0;
-    }
-  
-    50% {
-      transform: rotate(-10deg) scale(1.2);
-    }
-  }
-
-.container {
-    text-align: center;
-    background-color: #fff;
-    padding: 20px;
+.container{
+    width: 450px;
+    background: #fff;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
 }
 
-h1 {
-    color: #000000;
+.container h2{
+    font-weight: 600;
+    font-size: 1.31rem;
+    padding: 1rem 1.75rem;
+    border-bottom: 1px solid #d4dbe5;
 }
 
-.password-container {
-    margin-top: 20px;
+.wrapper{
+    margin: 1.25rem 1.75rem;
+}
+
+.wrapper .input-box{
+    position: relative;
+}
+
+.input-box input{
+    width: 100%;
+    height: 53px;
+    color: #000;
+    background: none;
+    font-size: 1.06rem;
+    font-weight: 500;
+    border-radius: 4px;
+    letter-spacing: 1.4px;
+    border: 1px solid #aaa;
+    padding: 0 2.85rem 0 1rem;
+}
+
+.input-box span{
+    position: absolute;
+    right: 13px;
+    cursor: pointer;
+    line-height: 53px;
+    color: #707070;
+}
+
+.input-box span:hover{
+    color: #43A047 !important;
+}
+
+.wrapper .pass-indicator{
+    width: 100%;
+    height: 4px;
+    position: relative;
+    margin-top: 0.75rem;
+    border-radius: 25px;
+}
+
+.pass-indicator::before{
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 50%;
+    border-radius: inherit;
+    transition: width 0.3s ease;
+}
+
+.pass-indicator#weak::before{
+    width: 20%;
+    background: #e64a4a;
+}
+
+.pass-indicator#medium::before{
+    width: 50%;
+    background: #f1c80b;
+}
+
+.pass-indicator#strong::before{
+    width: 100%;
+    background: #43A047;
+}
+
+.wrapper .pass-length{
+    margin: 1.56rem 0 1.25rem;
+}
+
+.pass-length .details{
+    display: flex;
+    justify-content: space-between;
+}
+
+.pass-length input{
+    width: 100%;
+    height: 5px;
+}
+
+.pass-settings .options{
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.pass-settings .options .option{
     display: flex;
     align-items: center;
+    margin-bottom: 1rem;
+    width: calc(100% / 2);
 }
 
-#password {
-    flex: 1;
-    padding: 10px;
-    font-size: 18px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-right: 10px;
+.options .option:first-child{
+    pointer-events: none;
 }
 
-.button {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin-right: 10px;
+.options .option:first-child input{
+    opacity: 0.7;
 }
 
-#generateButton {
-    background-color: #3498db;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
+.options .option input{
+    height: 16px;
+    width: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
 }
 
-#generateButton:hover {
-    background-color: #2980b9;
-}
-
-#copyButton {
-    background-color: #2ecc71;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
+.options .option label{
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+    color: #4f4f4f;
+    padding-left: 0.63rem;
 }
 
-#copyButton:hover {
-    background-color: #27ae60;
+.wrapper .generate-btn {
+  width: 100%;
+  color: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: #43A047;
+  font-size: 1.06rem;
+  padding: 0.94rem 0;
+  border-radius: 5px;
+  text-transform: uppercase;
+  margin: 0.94rem 0 1.3rem;
+  transition: background 0.3s, transform 0.2s;
 }
 
-@media (min-width: 601px) {
-    .password-container {
-        flex-direction: row;
-        justify-content: center;
-    }
-
-    #password {
-        margin-bottom: 0;
-        margin-right: 10px;
-    }
-
-    .button {
-        margin-bottom: 0;
-    }
+.wrapper .generate-btn:hover {
+  background: #388E3C;
+  transform: translateY(-2px);
 }
