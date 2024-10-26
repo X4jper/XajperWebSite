@@ -1,22 +1,18 @@
 function calculateBMI() {
-    // Get user input
+
     var weight = parseFloat(document.getElementById("weight").value);
     var height = parseFloat(document.getElementById("height").value);
 
-    // Check if the input is valid
     if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
         alert("Proszę wprowadzić prawidłowe wartości wagi i wzrostu.");
         return;
     }
 
-    // Calculate BMI
     var bmi = weight / ((height / 100) ** 2);
 
-    // Display result
     var resultElement = document.getElementById("result");
     resultElement.innerHTML = "Twoje BMI to: " + bmi.toFixed(2);
 
-    // Interpret BMI category
     var category = "";
     if (bmi < 18.5) {
         category = "Niedowaga";
@@ -30,3 +26,27 @@ function calculateBMI() {
 
     resultElement.innerHTML += "<br>Twoja kategoria BMI to: " + category;
 }
+
+function blokujMysz(event) {
+  if (event.button === 2 || event.which === 3) {
+      event.preventDefault();
+  }
+}
+
+function blokujKlawisze(event) {
+  if (event.key === 'F12') {
+      event.preventDefault();
+  }
+
+  if (event.ctrlKey && event.key === 'u') {
+      event.preventDefault();
+  }
+}
+
+document.addEventListener('mousedown', blokujMysz);
+
+document.addEventListener('keydown', blokujKlawisze);
+
+document.addEventListener('contextmenu', function (event) {
+  event.preventDefault();
+});
