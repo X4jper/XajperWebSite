@@ -21,11 +21,12 @@
     <meta property="og:title" content="Symulator">
     <meta name="description" content="Tutaj możesz przesumulować co chcesz!">
     <meta property="og:description" content="Tutaj możesz przesumulować co chcesz!">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <title>Symulator meczów</title>
 </head>
 
 <body>
-    <div class="widget-button-container" style="display: none;">
+    <div class="widget-button-container">
         <button onclick="toggleMatch()" class="widget-button"><i class="fas fa-arrow-right rotate-icon"></i></button>
     </div>
 
@@ -34,8 +35,8 @@
             <div class="header">
                 <div class="status">Na żywo</div>
                 <div class="tournament">
-                    <img src="symulator-logo.png"/>
-                    Symulator
+                    <i class="fas fa-trophy" style="color: #FFD700; font-size: 24px;"></i>
+                    <span style="margin-left: 8px;">Symulator</span>
                 </div>
                 <div class="actions">
                     <button class="btn-icon"><i class="fa-regular fa-star"></i></button>
@@ -46,7 +47,7 @@
                 <div class="column">
                     <div class="team team--home">
                         <div class="team-logo">
-                            <img src="drużyna-logo.png">
+                            <i class="fas fa-user" style="color: #2bb7f8; font-size: 48px;"></i>
                         </div>
                         <h2 class="team-name">Drużyna 1</h2>
                     </div>
@@ -67,18 +68,13 @@
                         <div class="referee">
                             Sędzia: <strong>Jan Kowalski</strong>
                         </div>
-                        <div class="bet-options">
-                            <button class="bet-option">1.48</button>
-                            <button class="bet-option">4.98</button>
-                            <button class="bet-option">8.24</button>
-                        </div>
-                        <button class="bet-place">Postaw zakład</button>
+                        <button class="bet-place">Pobierz</button>
                     </div>
                 </div>
                 <div class="column">
                     <div class="team team--away">
                         <div class="team-logo">
-                            <img src="drużyna-logo.png">
+                            <i class="fas fa-user" style="color: #f82b2b; font-size: 48px;"></i>
                         </div>
                         <h2 class="team-name">Drużyna 2</h2>
                     </div>
