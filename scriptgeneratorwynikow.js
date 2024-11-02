@@ -44,7 +44,7 @@ function blokujMysz(event) {
     }
   }
   
-  function blokujKlawisze(event) {
+function blokujKlawisze(event) {
     if (event.key === 'F12') {
         event.preventDefault();
     }
@@ -52,7 +52,7 @@ function blokujMysz(event) {
     if (event.ctrlKey && event.key === 'u') {
         event.preventDefault();
     }
-  }
+}
   
 document.addEventListener('mousedown', blokujMysz);
   
@@ -172,13 +172,12 @@ function generateResult() {
     // Rozpocznij aktualizacje wyniku i komentarzy co sekundę
     matchData.intervalId = setInterval(updateResult, 1000);
 
-    // Ręczne wywołanie funkcji updateResult na starcie
     updateResult();
 }
 
 function updateResult() {
     matchData.currentMinute += 1;
-    simulateEvent(); // Move the simulateEvent call here
+    simulateEvent();
 
     var eventsContainer = document.getElementById("events");
 
@@ -202,6 +201,109 @@ function updateResult() {
     checkGameStatus();
 }
 
+function aktualizujSedziego() {
+    const sedzia = localStorage.getItem('wylosowanySedzia');
+    localStorage.setItem('wylosowanySedzia', sedzia);
+    document.querySelector('.referee strong').innerText = sedzia;
+}
+setInterval(aktualizujSedziego, 1000);
+
+function odswiezInterfejs() {
+    document.querySelector('.date strong').innerText = new Date().toLocaleTimeString();
+
+}
+setInterval(odswiezInterfejs, 1000);
+
+function odswiezInterfejs() {
+    aktualizujNazwyDruzyn();
+    aktualizujWynik();
+    aktualizujCzasIMinuty();
+    aktualizujStatusMeczu();
+}
+setInterval(odswiezInterfejs, 1000);
+
+function aktualizujCzasIMinuty() {
+    const aktualnaData = new Date();
+
+    const opcjeDaty = {
+        day: '2-digit',
+        month: 'long'
+    };
+    const sformatowanyDzien = aktualnaData.toLocaleDateString('pl-PL', opcjeDaty);
+
+    const opcjeGodziny = {
+        hour: '2-digit',
+        minute: '2-digit'
+    };
+    const sformatowanaGodzina = aktualnaData.toLocaleTimeString('pl-PL', opcjeGodziny);
+
+    const dateElement = document.querySelector('.date');
+    dateElement.innerHTML = `${sformatowanyDzien} o <strong>${sformatowanaGodzina}</strong>`;
+    document.querySelector('.time-lapsed').innerText = `${matchData.currentMinute}'`;
+}
+
+document.querySelector('.bet-place').addEventListener('click', function() {
+    const overlayElement = document.querySelector('.overlay');
+
+    if (!overlayElement) {
+        console.error('Element .overlay nie został znaleziony');
+        return;
+    }
+
+    html2canvas(overlayElement, {
+        backgroundColor: null
+    }).then(canvas => {
+
+        if (!canvas) {
+            console.error('Nie udało się utworzyć obrazu z elementu .overlay');
+            return;
+        }
+
+        const link = document.createElement('a');
+        link.download = 'widżet.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    }).catch(error => {
+        console.error('Błąd podczas generowania obrazu:', error);
+    });
+});
+
+function aktualizujStatusMeczu() {
+    const statusElement = document.querySelector('.status');
+
+    if (matchData.currentMinute === 0) {
+        statusElement.innerText = "Brak";
+        statusElement.style.backgroundColor = "var(--color-bg-seconadry)";
+        statusElement.style.color = "grey";
+    } else if (matchData.currentMinute < 45) {
+        statusElement.innerText = "Na żywo";
+        statusElement.style.backgroundColor = "var(--color-bg-alert)";
+        statusElement.style.color = "var(--color-text-alert)";
+    } else if (matchData.currentMinute === 45) {
+        statusElement.innerText = "Przerwa";
+        statusElement.style.backgroundColor = "var(--color-bg-yellow)";
+        statusElement.style.color = "white";
+    } else if (matchData.currentMinute > 45 && matchData.currentMinute < 90) {
+        statusElement.innerText = "Na żywo";
+        statusElement.style.backgroundColor = "var(--color-bg-alert)";
+        statusElement.style.color = "var(--color-text-alert)";
+    } else if (matchData.currentMinute >= 90) {
+        statusElement.innerText = "Koniec";
+        statusElement.style.backgroundColor = "var(--color-bg-alert)";
+        statusElement.style.color = "var(--color-text-alert)";
+    }
+}
+
+function aktualizujWynik() {
+    document.querySelector('.score-number--leading').innerText = matchData.score.team1;
+    document.querySelector('.score-number:last-child').innerText = matchData.score.team2;
+}
+
+function aktualizujNazwyDruzyn() {
+    document.querySelector('.team--home .team-name').innerText = matchData.team1.name;
+    document.querySelector('.team--away .team-name').innerText = matchData.team2.name;
+}
+
 localStorage.removeItem('wylosowanySedzia')
 
 function displayResult() {
@@ -210,7 +312,6 @@ function displayResult() {
 
     const wylosowanySedzia = localStorage.getItem('wylosowanySedzia');
 
-    // Sprawdzanie, czy matchData jest prawidłowe
     console.log("matchData:", matchData);
 
     document.getElementById("brak-status").style.display = "block";
