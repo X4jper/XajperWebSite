@@ -256,6 +256,11 @@ button:hover {
     --color-bg-seconadry: #f3f5f9;
     --color-bg-alert: #fdeaec;
     --color-theme-primary: #00d0ff;
+    --color-bg-yellow: #f9e79f;
+}
+
+.overlay, .overlay * {
+    background-color: transparent;
 }
 
 button {
