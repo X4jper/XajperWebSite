@@ -252,6 +252,40 @@ section .title::after {
   transform: translateX(-50%);
 }
 
+.features-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.feature-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  transition: transform 0.3s, opacity 0.3s;
+  opacity: 0;
+}
+
+.feature-row img {
+  width: 200px;
+  height: auto;
+  border-radius: 10px;
+}
+
+.feature-row .text-content {
+  flex: 1;
+}
+
+.feature-row.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+h3 i.fas {
+  color: #22b4b7;
+}
+
 .features, .contributors {
   color: #fff;
   background: #121212;
