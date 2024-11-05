@@ -80,3 +80,23 @@ document.addEventListener('contextmenu', function (event) {
 document.addEventListener('mousedown', blokujMysz);
 
 document.addEventListener('keydown', blokujKlawisze);
+
+document.addEventListener("DOMContentLoaded", function () {
+    const featureRows = document.querySelectorAll(".feature-row");
+ 
+    function revealFeatures() {
+       featureRows.forEach((row, index) => {
+          const position = row.getBoundingClientRect().top;
+          const screenPosition = window.innerHeight / 1.3;
+          
+          if (position < screenPosition) {
+             setTimeout(() => {
+                row.classList.add("visible");
+             }, index * 200);
+          }
+       });
+    }
+ 
+    window.addEventListener("scroll", revealFeatures);
+    revealFeatures();
+ });
