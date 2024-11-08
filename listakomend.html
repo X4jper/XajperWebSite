@@ -1,42 +1,727 @@
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Lista komend XajperBOT</title>
     <link rel="icon" href="ikonkalistakomend.ico" type="image/x-icon">
-    <link rel="stylesheet" href="stylelista.css">
-    <title>Komendy XajperBOT</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
 </head>
-
 <body>
-    <div id="scrollToTopBtn" title="Do góry!"><i class="fas fa-arrow-up"></i></div>
-    <nav>
+    <header>
+        <h1>Lista komend XajperBOT by Xajper</h1>
+        <p id="commandCounter">Przeglądaj dostępne komendy i poznaj wszystkie możliwości bota! (0)</p>
+    </header>
+
+    <section class="categories">
+        <button class="category-btn" data-category="moderacyjne">Moderacyjne</button>
+        <button class="category-btn" data-category="4fun">4fun</button>
+        <button class="category-btn" data-category="ekonomia">Ekonomia</button>
+        <button class="category-btn" data-category="poziomy">System poziomów</button>
+        <button class="category-btn" data-category="muzyka">Muzyka</button>
+        <button class="category-btn" data-category="rpg">RPG</button>
+        <button class="category-btn" data-category="menadżer">Menadżer [ANULOWANE]</button>
+        <button class="category-btn" id="randomCommandBtn">Losuj Komendę</button>
+    </section>
+
+
+    <section class="commands">
+
+        <div class="command-card" data-category="moderacyjne">
+            <h2>Ban</h2>
+            <p><em>prefix</em> ban {@użytkownik} {powód}</p>
+            <br>
+            <p>Przykład: !ban @Xajper trollowanie</p>
+        </div>
         
-        <div class="container">
-            <div id="navbar">
-
-            </div>
-            <div class="commands-header">
-                <p>Lista komend: <span id="command-count">0+</span> <i class="fas fa-fire"></i></p>
-            </div>
-            <a href="xajperbot.html" class="back-button"><i class="fas fa-arrow-left"></i> Powrót</a>
+        <div class="command-card" data-category="moderacyjne">
+            <h2>Unban</h2>
+            <p><em>prefix</em> unban {użytkownik#0000}</p>
+            <br>
+            <p>Przykład: !unban Xajper#0000</p>
         </div>
-    </nav>
-
-    <div class="container">
-
-        <ul id="commandsList">
-
-        </ul>
-        <div id="detailsContainer" class="hidden">
-            <h2>Szczegóły</h2>
-            <p id="detailsText"></p>
-            <span id="tagPlaceholder" class="test-tag"></span>
+        
+        <div class="command-card" data-category="moderacyjne">
+            <h2>Kick</h2>
+            <p><em>prefix</em> kick {@użytkownik} {powód}</p>
+            <br>
+            <p>Przykład: !kick @Xajper nieprzestrzeganie regulaminu</p>
         </div>
-    </div>
-    <script src="scriptlista.js"></script>
+        
+        <div class="command-card" data-category="moderacyjne">
+            <h2>Mute</h2>
+            <p><em>prefix</em> mute {@użytkownik} {powód}</p>
+            <br>
+            <p>Przykład: !mute @Xajper floodowanie</p>
+        </div>
+        
+        <div class="command-card" data-category="moderacyjne">
+            <h2>Tempmute</h2>
+            <p><em>prefix</em> tempmute {@użytkownik} {czas w minutach} {powód}</p>
+            <br>
+            <p>Przykład: !tempmute @Xajper 10 spamowanie</p>
+        </div>
+        
+        <div class="command-card" data-category="moderacyjne">
+            <h2>Unmute</h2>
+            <p><em>prefix</em> unmute {@użytkownik}</p>
+            <br>
+            <p>Przykład: !unmute @Xajper</p>
+        </div>
+        
+        <div class="command-card" data-category="moderacyjne">
+            <h2>Clear</h2>
+            <p><em>prefix</em> clear {ilość}</p>
+            <br>
+            <p>Przykład: !clear 10</p>
+        </div>
+        
+        <div class="command-card" data-category="moderacyjne">
+            <h2>Warn</h2>
+            <p><em>prefix</em> warn {@użytkownik} {powód}</p>
+            <br>
+            <p>Przykład: !warn @Xajper wysyła linki bez pozwolenia</p>
+        </div>
+        
+        <div class="command-card" data-category="moderacyjne">
+            <h2>Unwarn</h2>
+            <p><em>prefix</em> unwarn {@użytkownik} {numer warna}</p>
+            <br>
+            <p>Przykład: !unwarn @Xajper 1</p>
+        </div>
+        
+        <div class="command-card" data-category="moderacyjne">
+            <h2>Warninfo</h2>
+            <p><em>prefix</em> warninfo {@użytkownik}</p>
+            <br>
+            <p>Przykład: !warninfo @Xajper</p>
+        </div>
+        
+        <div class="command-card" data-category="moderacyjne">
+            <h2>Stwórz ticket</h2>
+            <p><em>prefix</em> ticket</p>
+            <br>
+            <p>Przykład: !ticket</p>
+        </div>
+        
+        <div class="command-card" data-category="moderacyjne">
+            <h2>Stwórz ankietę</h2>
+            <p><em>prefix</em> ankieta NAZWA PYTANIE WYBÓR 1 [...]</p>
+            <br>
+            <p>Przykład: !ankieta Pytanie "Czy serwer Xajper Team jest fajny?" Tak Nie</p>
+        </div>
+        
+        <div class="command-card" data-category="moderacyjne">
+            <h2>Giveaway</h2>
+            <p><em>prefix</em> giveaway</p>
+            <br>
+            <p>Przykład: !giveaway</p>
+        </div>
+        
+        <div class="command-card" data-category="moderacyjne">
+            <h2>Chcesz zgłosić pewną osobę?</h2>
+            <p><em>prefix</em> report {@użytkownik} {powód}</p>
+            <br>
+            <p>Przykład: !report @Xajper on nie przestrzega regulaminu, zbanujcie go</p>
+        </div>
+        
+        <div class="command-card" data-category="moderacyjne">
+            <h2>Usuń pieniądze</h2>
+            <p><em>prefix</em> removemoney {@użytkownik} {ilość} {portfel/bank}</p>
+            <br>
+            <p>Przykład: !removemoney @Xajper 100 portfel</p>
+        </div>
+        
+        <div class="command-card" data-category="moderacyjne">
+            <h2>Dodaj pieniądze</h2>
+            <p><em>prefix</em> addmoney {@użytkownik} {ilość} {portfel/bank}</p>
+            <br>
+            <p>Przykład: !addmoney @Xajper 100 bank</p>
+        </div>
+        
+        <div class="command-card" data-category="moderacyjne">
+            <h2>Dodaj rolę</h2>
+            <p><em>prefix</em> addrole {@użytkownik} {@rola}</p>
+            <br>
+            <p>Przykład: !addrole @Xajper @✨・ Zastępca</p>
+        </div>
+        
+        <div class="command-card" data-category="moderacyjne">
+            <h2>Usuń rolę</h2>
+            <p><em>prefix</em> removerole {@użytkownik} {@rola}</p>
+            <br>
+            <p>Przykład: !removerole @Xajper @✨・ Zastępca</p>
+        </div>
+        
+        <div class="command-card" data-category="moderacyjne">
+            <h2>Zmień prefix</h2>
+            <p><em>prefix</em> changeprefix {nowy prefix}</p>
+            <br>
+            <p>Przykład: !changeprefix $</p>
+        </div>
+        
+        <div class="command-card" data-category="moderacyjne">
+            <h2>Ustaw kanały</h2>
+            <p><em>prefix</em> ustaw/set</p>
+            <br>
+            <p>Przykład: !ustaw</p>
+        </div>
+        
+        <div class="command-card" data-category="moderacyjne">
+            <h2>Zablokuj kanał/serwer</h2>
+            <p><em>prefix</em> lock {#kanał}</p>
+            <br>
+            <p>Przykład: !lock #chat</p>
+        </div>
+        
+        <div class="command-card" data-category="moderacyjne">
+            <h2>Odblokuj kanał/serwer</h2>
+            <p><em>prefix</em> unlock {#kanał}</p>
+            <br>
+            <p>Przykład: !unlock #chat</p>
+        </div>
+
+        <div class="command-card" data-category="4fun">
+            <h2>Losowanie od 0 do 100</h2>
+            <p><em>prefix</em> losuj</p>
+            <br>
+            <p>Przykład: !losuj</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Wylosuj liczbę do podanego zakresu</h2>
+            <p><em>prefix</em> roll {zakres}</p>
+            <br>
+            <p>Przykład: !roll 100</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Witaj</h2>
+            <p><em>prefix</em> witaj</p>
+            <br>
+            <p>Przykład: !witaj</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Avatar</h2>
+            <p><em>prefix</em> avatar {@użytkownik}</p>
+            <br>
+            <p>Przykład: !avatar @Xajper</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Info o użytkowniku</h2>
+            <p><em>prefix</em> userinfo {@użytkownik}</p>
+            <br>
+            <p>Przykład: !userinfo @Xajper</p>
+        </div>
+
+        <div class="command-card" data-category="4fun">
+            <h2>Info o bocie</h2>
+            <p><em>prefix</em> botinfo</p>
+            <br>
+            <p>Przykład: !botinfo</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Serwer info</h2>
+            <p><em>prefix</em> serwerinfo</p>
+            <br>
+            <p>Przykład: !serwerinfo</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>8ball</h2>
+            <p><em>prefix</em> 8ball {pytanie}</p>
+            <br>
+            <p>Przykład: !8ball Czy jutro będzie ładna pogoda?</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Kółko i krzyżyk</h2>
+            <p><em>prefix</em> ox</p>
+            <br>
+            <p>Przykład: !ox</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Poszukiwany</h2>
+            <p><em>prefix</em> wanted {@użytkownik}</p>
+            <br>
+            <p>Przykład: !wanted @Xajper</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Mem</h2>
+            <p><em>prefix</em> mem</p>
+            <br>
+            <p>Przykład: !mem</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Żart</h2>
+            <p><em>prefix</em> zart</p>
+            <br>
+            <p>Przykład: !zart</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Zdjęcie kota</h2>
+            <p><em>prefix</em> kot</p>
+            <br>
+            <p>Przykład: !kot</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Zdjęcie psa</h2>
+            <p><em>prefix</em> pies</p>
+            <br>
+            <p>Przykład: !pies</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Mój kanał</h2>
+            <p><em>prefix</em> xajper</p>
+            <br>
+            <p>Przykład: !xajper</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>IQ</h2>
+            <p><em>prefix</em> iq</p>
+            <br>
+            <p>Przykład: !iq</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Rzuć kostką</h2>
+            <p><em>prefix</em> kostka</p>
+            <br>
+            <p>Przykład: !kostka</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Rzuć monetą</h2>
+            <p><em>prefix</em> moneta</p>
+            <br>
+            <p>Przykład: !moneta</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>System quizów</h2>
+            <p><em>prefix</em> quiz</p>
+            <br>
+            <p>Przykład: !quiz</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Ping! Pong!</h2>
+            <p><em>prefix</em> ping</p>
+            <br>
+            <p>Przykład: !ping</p>
+        </div>
+
+        <div class="command-card" data-category="4fun">
+            <h2>Szachy</h2>
+            <p><em>prefix</em> szachy {@ty} {@przeciwnik}</p>
+            <br>
+            <p>Przykład: !szachy @Xajper @Xajper2</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Propozycja</h2>
+            <p><em>prefix</em> propozycja {propozycja}</p>
+            <br>
+            <p>Przykład: !propozycja "Proszę dodać nową komendę!"</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Trivia</h2>
+            <p><em>prefix</em> trivia {temat}</p>
+            <br>
+            <p>Przykład: !trivia mapa 3 europa</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Chcesz żeby bot napisał to co ty emotkami?</h2>
+            <p><em>prefix</em> kopiuj {tekst}</p>
+            <br>
+            <p>Przykład: !kopiuj</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Kamień papier nożyce</h2>
+            <p><em>prefix</em> kpn {wybierz: papier, kamień, nożyce}</p>
+            <br>
+            <p>Przykład: !kpn kamień</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Ciekawostka</h2>
+            <p><em>prefix</em> ciekawostka</p>
+            <br>
+            <p>Przykład: !ciekawostka</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Rozkmina</h2>
+            <p><em>prefix</em> rozkmina</p>
+            <br>
+            <p>Przykład: !rozkmina</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Zgadywanie liczby</h2>
+            <p><em>prefix</em> zgadywanie {próg liczby} {liczba prób}</p>
+            <br>
+            <p>Przykład: !zgadywanie 50 5</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Generator embed</h2>
+            <p><em>prefix</em> embed {tekst}</p>
+            <br>
+            <p>Przykład: !embed Jak się masz?</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>POLSKA GUROM!</h2>
+            <p><em>prefix</em> polskagurom</p>
+            <br>
+            <p>Przykład: !polskagurom</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Literalnie</h2>
+            <p><em>prefix</em> literalnie</p>
+            <br>
+            <p>Przykład: !literalnie</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Zmierz się z botem w karnych!</h2>
+            <p><em>prefix</em> football {bramkarz}</p>
+            <br>
+            <p>Przykład: !football Szczęsny</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Dodaj w prosty sposób</h2>
+            <p><em>prefix</em> dodaj {liczba1} {liczba2}</p>
+            <br>
+            <p>Przykład: !dodaj 5 10</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Daily nagrody</h2>
+            <p><em>prefix</em> odbierz</p>
+            <br>
+            <p>Przykład: !odbierz</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Ustaw datę swoich urodzin!</h2>
+            <p><em>prefix</em> urodziny {data w formacie DD-MM-YYYY}</p>
+            <br>
+            <p>Przykład: !urodziny 27-01-2000</p>
+        </div>
+        
+        <div class="command-card" data-category="4fun">
+            <h2>Wyślij życzenia urodzinowe</h2>
+            <p><em>prefix</em> zyczenia {@użytkownik}</p>
+            <br>
+            <p>Przykład: !zyczenia @Xajper</p>
+        </div>
+
+        <div class="command-card" data-category="mafia">
+            <h2>Lista komend mafia</h2>
+            <p><em>prefix</em> mafia</p>
+            <br>
+            <p>Przykład: !mafia</p>
+        </div>
+    
+        <div class="command-card" data-category="4fun">
+            <h2>Connect4!</h2>
+            <p><em>prefix</em> connect4 {@przeciwnik}</p>
+            <br>
+            <p>Przykład: !connect4 @Xajper</p>
+        </div>
+    
+        <div class="command-card" data-category="4fun">
+            <h2>BlackJack</h2>
+            <p><em>prefix</em> blackjack</p>
+            <br>
+            <p>Przykład: !blackjack</p>
+        </div>
+    
+        <div class="command-card" data-category="4fun">
+            <h2>Wylosuj to co chcesz dzięki botu</h2>
+            <p><em>prefix</em> losowanie</p>
+            <br>
+            <p>Przykład: !losowanie A B C</p>
+        </div>
+    
+        <div class="command-card" data-category="4fun">
+            <h2>Sprawdź pogodę</h2>
+            <p><em>prefix</em> pogoda {lokalizacja}</p>
+            <br>
+            <p>Przykład: !pogoda polska</p>
+        </div>
+    
+        <div class="command-card" data-category="4fun">
+            <h2>Zobacz listę piłkarzy reprezentacji</h2>
+            <p><em>prefix</em> reprezentacja</p>
+            <br>
+            <p>Przykład: !reprezentacja</p>
+        </div>
+    
+        <div class="command-card" data-category="4fun">
+            <h2>Znajdź ukryte słowo</h2>
+            <p><em>prefix</em> rozsypanka</p>
+            <br>
+            <p>Przykład: !rozsypanka</p>
+        </div>
+    
+        <div class="command-card" data-category="4fun">
+            <h2>Zagraj w wisielca</h2>
+            <p><em>prefix</em> wisielec</p>
+            <br>
+            <p>Przykład: !wisielec</p>
+        </div>
+
+        <div class="command-card" data-category="ekonomia">
+            <h2>Stan konta</h2>
+            <p><em>prefix</em> konto</p>
+            <br>
+            <p>Przykład: !konto</p>
+        </div>
+    
+        <div class="command-card" data-category="ekonomia">
+            <h2>Codzienny zarobek</h2>
+            <p><em>prefix</em> daily</p>
+            <br>
+            <p>Przykład: !daily</p>
+        </div>
+    
+        <div class="command-card" data-category="ekonomia">
+            <h2>Kup przedmiot</h2>
+            <p><em>prefix</em> kup {przedmiot}</p>
+            <br>
+            <p>Przykład: !kup dom</p>
+        </div>
+    
+        <div class="command-card" data-category="ekonomia">
+            <h2>Sprzedaj przedmiot</h2>
+            <p><em>prefix</em> sprzedaj {przedmiot}</p>
+            <br>
+            <p>Przykład: !sprzedaj krzesło</p>
+        </div>
+    
+        <div class="command-card" data-category="ekonomia">
+            <h2>Wypłać pieniądze</h2>
+            <p><em>prefix</em> with {all/kwota}</p>
+            <br>
+            <p>Przykład: !with 100</p>
+        </div>
+    
+        <div class="command-card" data-category="ekonomia">
+            <h2>Wpłać pieniądze</h2>
+            <p><em>prefix</em> dep {all/kwota}</p>
+            <br>
+            <p>Przykład: !dep all</p>
+        </div>
+    
+        <div class="command-card" data-category="ekonomia">
+            <h2>Topka najbogatszych ludzi</h2>
+            <p><em>prefix</em> lb</p>
+            <br>
+            <p>Przykład: !lb</p>
+        </div>
+    
+        <div class="command-card" data-category="ekonomia">
+            <h2>Hazard</h2>
+            <p><em>prefix</em> hazard {kwota}</p>
+            <br>
+            <p>Przykład: !hazard 50</p>
+        </div>
+    
+        <div class="command-card" data-category="ekonomia">
+            <h2>Kasyno</h2>
+            <p><em>prefix</em> kasyno {kwota}</p>
+            <br>
+            <p>Przykład: !kasyno 20</p>
+        </div>
+
+        <div class="command-card" data-category="ekonomia">
+            <h2>Łowienie ryb</h2>
+            <p><em>prefix</em> jezioro</p>
+            <br>
+            <p>Przykład: !jezioro</p>
+        </div>
+
+        <div class="command-card" data-category="ekonomia">
+            <h2>Polowanie</h2>
+            <p><em>prefix</em> polowanie</p>
+            <br>
+            <p>Przykład: !polowanie</p>
+        </div>
+
+        <div class="command-card" data-category="ekonomia">
+            <h2>Kopalnia</h2>
+            <p><em>prefix</em> kopalnia</p>
+            <br>
+            <p>Przykład: !kopalnia</p>
+        </div>
+
+        <div class="command-card" data-category="ekonomia">
+            <h2>Tartak</h2>
+            <p><em>prefix</em> tartak</p>
+            <br>
+            <p>Przykład: !tartak</p>
+        </div>
+
+        <div class="command-card" data-category="ekonomia">
+            <h2>Lista skrzynek</h2>
+            <p><em>prefix</em> skrzynki</p>
+            <br>
+            <p>Przykład: !skrzynki</p>
+        </div>
+        
+        <div class="command-card" data-category="ekonomia">
+            <h2>Otwórz skrzynkę</h2>
+            <p><em>prefix</em> otwórz {rodzaj skrzynki}</p>
+            <br>
+            <p>Przykład: !otwórz epicka</p>
+        </div>
+        
+        <div class="command-card" data-category="ekonomia">
+            <h2>Kradzież</h2>
+            <p><em>prefix</em> rob {@użytkownik}</p>
+            <br>
+            <p>Przykład: !rob @Xajper</p>
+        </div>
+        
+        <div class="command-card" data-category="ekonomia">
+            <h2>Twój ekwipunek</h2>
+            <p><em>prefix</em> inventory</p>
+            <br>
+            <p>Przykład: !inventory</p>
+        </div>
+        
+        <div class="command-card" data-category="ekonomia">
+            <h2>Edukacja to podstawa! Chcesz zarabiać więcej? Poucz się!</h2>
+            <p><em>prefix</em> edukacja {ilość pieniędzy przeznaczona na edukację}</p>
+            <br>
+            <p>Przykład: !edukacja 500</p>
+        </div>
+        
+        <div class="command-card" data-category="ekonomia">
+            <h2>Rzut monetą</h2>
+            <p><em>prefix</em> cf {kwota} {orzeł/reszka}</p>
+            <br>
+            <p>Przykład: !cf 10 orzeł</p>
+        </div>
+        
+        <div class="command-card" data-category="ekonomia">
+            <h2>Crime</h2>
+            <p><em>prefix</em> crime</p>
+            <br>
+            <p>Przykład: !crime</p>
+        </div>
+        
+        <div class="command-card" data-category="ekonomia">
+            <h2>Nagrody z ról</h2>
+            <p><em>prefix</em> collect</p>
+            <br>
+            <p>Przykład: !collect</p>
+        </div>
+        
+        <div class="command-card" data-category="ekonomia">
+            <h2>Rozwiązywanie działań matematycznych</h2>
+            <p><em>prefix</em> math</p>
+            <br>
+            <p>Przykład: !math</p>
+        </div>
+
+        <div class="command-card" data-category="ekonomia">
+            <h2>Ruletka</h2>
+            <p><em>prefix</em> ruletka {kwota} {liczba|kolor|liczba parzysta/nieparzysta}</p>
+            <br>
+            <p>Przykład: !ruletka 50 czerwony</p>
+        </div>
+
+        <div class="command-card" data-category="poziomy">
+            <h2>Twój aktualny poziom</h2>
+            <p><em>prefix</em> rank</p>
+            <br>
+            <p>Przykład: !rank</p>
+        </div>
+
+        <div class="command-card" data-category="poziomy">
+            <h2>Osoby z najwyższym poziomem</h2>
+            <p><em>prefix</em> toplvl</p>
+            <br>
+            <p>Przykład: !toplvl</p>
+        </div>
+
+        <div class="command-card" data-category="muzyka">
+            <h2>Start</h2>
+            <p><em>prefix</em> play {nazwa/link}</p>
+            <br>
+            <p>Przykład: !play taki mały ja</p>
+        </div>
+
+        <div class="command-card" data-category="muzyka">
+            <h2>Stop (anuluj)</h2>
+            <p><em>prefix</em> stop</p>
+            <br>
+            <p>Przykład: !stop</p>
+        </div>
+
+        <div class="command-card" data-category="muzyka">
+            <h2>Zatrzymaj muzykę</h2>
+            <p><em>prefix</em> zatrzymaj</p>
+            <br>
+            <p>Przykład: !zatrzymaj</p>
+        </div>
+
+        <div class="command-card" data-category="muzyka">
+            <h2>Wznów muzykę</h2>
+            <p><em>prefix</em> wznów</p>
+            <br>
+            <p>Przykład: !wznów</p>
+        </div>
+
+        <div class="command-card" data-category="muzyka">
+            <h2>Playlista</h2>
+            <p><em>prefix</em> playlista</p>
+            <br>
+            <p>Przykład: !playlista</p>
+        </div>
+
+        <div class="command-card" data-category="muzyka">
+            <h2>Wyczyść playlistę</h2>
+            <p><em>prefix</em> playlista clear</p>
+            <br>
+            <p>Przykład: !playlista clear</p>
+        </div>
+
+        <div class="command-card" data-category="muzyka">
+            <h2>Usuń muzykę z playlisty</h2>
+            <p><em>prefix</em> playlista delete (nazwa piosenki)</p>
+            <br>
+            <p>Przykład: !playlista delete taki mały ja</p>
+        </div>
+
+        <div class="command-card" data-category="muzyka">
+            <h2>Pomiń muzykę</h2>
+            <p><em>prefix</em> skip</p>
+            <br>
+            <p>Przykład: !skip</p>
+        </div>
+        
+    </section>        
+    
 </body>
-
 </html>
