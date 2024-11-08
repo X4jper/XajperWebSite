@@ -1,243 +1,113 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
-body {
-    font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to top, #ccc, #8ed6ff, #fff);
 }
 
-nav {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-}
-
-.underline {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #62daf6;
-    transition: width 0.3s ease-in-out;
-}
-
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    justify-content: center;
-}
-
-
-#closeButton {
-    background-color: #62daf6;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    height: 20px;
-    top: 0;
-    right: 0;
-    font-size: 10px;
-    justify-content: center;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1f1f1f;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s, box-shadow 0.3s;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
 }
 
-#closeButton:hover {
-    background-color: #92ebff;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+.command-card h2 {
+    color: #64b5f6;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
 }
 
-.back-button {
-    position: absolute;
-    top: 15px;
-    left: 25px;
-    margin-bottom: 15px;
-    font-size: 18px;
-}
-
-.commands-header {
-    position: absolute;
-    top: 0px;
-    right: 25px;
-    font-size: 18px;
-}
-
-.commands-header i.fas.fa-fire {
-    color: rgb(250, 82, 21);
-    animation: growNumber 2s forwards; /* Dodanie animacji */
-}
-
-@keyframes growNumber {
-    from {
-        content: "Lista komend: 0+ "; /* Początkowy tekst */
-    }
-    to {
-        content: "Lista komend: 150+ "; /* Końcowy tekst */
-    }
+header {
+    text-align: center;
+    margin-bottom: 40px;
 }
 
 h1 {
-    margin: 0;
-    color: #62daf6;
+    font-size: 2.5rem;
+    color: #64b5f6;
+    animation: fadeInDown 1s ease-out;
+}
+
+.categories {
     display: flex;
-    justify-content: center;
-  }
-
-#navbar {
-    display: flex;
-    margin-top: 10px;
-    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
 }
 
-#navbar a {
-    color: white;
-    text-decoration: none;
-    margin-right: 20px;
-    position: relative;
-}
-
-#navbar a:hover {
-    color: #92ebff;
-}
-
-a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 16px;
-    transition: color 0.3s;
-}
-
-a:hover {
-    color: #92ebff;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    cursor: pointer;
-    padding: 10px;
-    margin: 8px 0;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-
-    border-bottom: 2px solid #62daf6;
-}
-
-li:hover {
-    background-color: #f2f2f2;
-}
-
-li.active {
-    background-color: #62daf6;
-    border-bottom: 2px solid #fff;
-}
-
-.hidden {
-    display: none;
-}
-
-#detailsContainer {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-}
-
-.test-tag {
-    background-color: #62daf6;
-    color: white;
-    padding: 2px 5px;
-    border-radius: 3px;
-    font-size: 0.8em;
-}
-
-.test-tag:hover {
-    text-decoration: underline;
-}
-
-::-webkit-scrollbar {
-    width: 12px;
-}
-
-::-webkit-scrollbar-track {
-    background-color: #333;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: #62daf6;
-    border-radius: 6px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background-color: #000000;
-}
-
-#scrollToTopBtn {
-    cursor: pointer;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #92ebff;
-    color: #fff;
-    padding: 10px;
+.category-btn {
+    background-color: #333333;
+    color: #ffffff;
     border: none;
-    border-radius: 50%;
-    font-size: 16px;
-    width: 20px;
-    height: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.category-btn:hover {
+    background-color: #64b5f6;
+    transform: scale(1.1);
+}
+
+.commands {
     display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
     justify-content: center;
-    align-items: center;
-    transition: background-color 0.5s ease, transform 0.2s ease;
-}
-  
-#scrollToTopBtn:hover {
-background-color: #7de5ee;
-}
-  
-#scrollToTopBtn:active {
-transform: scale(1.2);
-}
-  
-#scrollToTopBtn i {
-margin: 0;
 }
 
-@media (max-width: 600px) {
-    #navbar {
-        flex-direction: column;
-        align-items: center;
-    }
+.command-card {
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    padding: 20px;
+    width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s forwards;
+}
 
-    #navbar a {
-        margin-right: 0;
-        margin-bottom: 10px;
-    }
+.command-card p {
+    color: #cccccc;
+    font-size: 0.9rem;
+}
 
-    h1 {
-        margin: 0;
-        color: #62daf6;
-        display: flex;
-        justify-content: center;
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
     }
-
-    .commands-header {
-        display: none;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
+}
 
-    .back-button {
-        display: none;
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.counter-animation {
+    animation: scaleUp 0.5s ease-out forwards;
+}
+
+@keyframes scaleUp {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.2);
     }
 }
