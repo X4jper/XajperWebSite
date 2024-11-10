@@ -268,7 +268,7 @@ section .title::after {
 }
 
 .feature-row img {
-  width: 200px;
+  width: 400px;
   height: auto;
   border-radius: 10px;
 }
