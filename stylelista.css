@@ -25,18 +25,31 @@ body {
 header {
     text-align: center;
     margin-bottom: 40px;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 
 h1 {
     font-size: 2.5rem;
     color: #64b5f6;
     animation: fadeInDown 1s ease-out;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+#commandCounter {
+    font-size: 1rem;
+    color: #cccccc;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 
 .categories {
     display: flex;
     gap: 10px;
     margin-bottom: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .category-btn {
@@ -109,5 +122,70 @@ h1 {
     }
     to {
         transform: scale(1.2);
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .category-btn {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+
+    .commands {
+        gap: 15px;
+    }
+
+    .command-card {
+        width: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .category-btn {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+
+    .commands {
+        gap: 10px;
+    }
+
+    .command-card {
+        width: 150px;
+        padding: 15px;
+    }
+
+    .command-card h2 {
+        font-size: 1rem;
+    }
+
+    .command-card p {
+        font-size: 0.8rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .commands {
+        gap: 30px;
+    }
+
+    .command-card {
+        width: 250px;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    .category-btn {
+        font-size: 1.1rem;
     }
 }
