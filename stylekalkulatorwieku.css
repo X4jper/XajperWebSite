@@ -1,52 +1,70 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
+    background: linear-gradient(135deg, #6e45e2, #88d3ce);
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    color: #fff;
 }
 
 .container {
     text-align: center;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 90%;
 }
 
 h1 {
+    font-size: 2.5rem;
     color: #333;
+    margin-bottom: 20px;
 }
 
 label {
     display: block;
     margin-bottom: 10px;
+    font-size: 1.1rem;
+    color: #555;
 }
 
 input {
-    padding: 8px;
+    width: 80%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
 }
 
 button {
-    background-color: #4caf50;
+    background: linear-gradient(45deg, #ff6f61, #ff9472);
     color: #fff;
-    padding: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
-    border-radius: 4px;
+    transition: transform 0.2s, background-color 0.2s;
 }
 
 button:hover {
-    background-color: #45a049;
+    transform: scale(1.05);
+    background: linear-gradient(45deg, #ff9472, #ff6f61);
 }
 
 #result {
     margin-top: 20px;
     font-weight: bold;
     color: #333;
+    font-size: 1.1rem;
+    text-align: left;
+    line-height: 1.5;
 }
 
 #confetti-container {
@@ -64,7 +82,6 @@ button:hover {
     height: 10px;
     border-radius: 50%;
     pointer-events: none;
-    transform-origin: 50% 50%;
     opacity: 0.7;
     animation: confetti-fall 3s linear infinite;
 }
@@ -72,5 +89,22 @@ button:hover {
 @keyframes confetti-fall {
     to {
         transform: translateY(100vh);
+    }
+}
+
+.loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
     }
 }
