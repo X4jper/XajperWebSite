@@ -12,7 +12,7 @@ body{
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background: #f4f4f4;
+    background: linear-gradient(135deg, #6e45e2, #88d3ce);
 }
 
 .container{
@@ -59,7 +59,7 @@ body{
 }
 
 .input-box span:hover{
-    color: #43A047 !important;
+    color: #333 !important;
 }
 
 .wrapper .pass-indicator{
@@ -143,21 +143,17 @@ body{
 }
 
 .wrapper .generate-btn {
-  width: 100%;
-  color: #fff;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  background: #43A047;
-  font-size: 1.06rem;
-  padding: 0.94rem 0;
-  border-radius: 5px;
-  text-transform: uppercase;
-  margin: 0.94rem 0 1.3rem;
-  transition: background 0.3s, transform 0.2s;
+    background: linear-gradient(45deg, #ff6f61, #ff9472);
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
 }
 
 .wrapper .generate-btn:hover {
-  background: #388E3C;
-  transform: translateY(-2px);
+    transform: scale(1.05);
+    background: linear-gradient(45deg, #ff9472, #ff6f61);
 }
