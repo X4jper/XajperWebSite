@@ -1,101 +1,104 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-  }
-  
-  form {
-    max-width: 400px;
-    margin: 20px auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 8px;
-    color: #333;
-  }
-  
-  input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 16px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button {
-    background-color: #4caf50;
-    color: #fff;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  th {
-    background-color: #4caf50;
-    color: #fff;
-  }
-  
-  #average {
-    font-weight: bold;
-    color: #4caf50;
-  }
-  
-  /* Animacje */
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  
-  form, p, table {
-    animation: fadeIn 1s ease-in-out;
-  }
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #6e45e2, #88d3ce);
+  margin: 0;
+  padding: 0;
+  color: #fff;
+}
 
-  #averageSection {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #f4f4f4;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+form {
+  max-width: 400px;
+  margin: 20px auto;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+button {
+  background: linear-gradient(45deg, #ff6f61, #ff9472);
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(45deg, #ff9472, #ff6f61);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #ddd;
+  color: #fff;
+}
+
+#average {
+  font-weight: bold;
+  color: #333;
+}
+
+#averageSection {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+#averageTitle {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+#averageValue {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ddd;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
   }
-  
-  #averageTitle {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
+  to {
+      opacity: 1;
   }
-  
-  #averageValue {
-    font-size: 24px;
-    font-weight: bold;
-    color: #4caf50;
-  }
+}
+
+form, p, table {
+  animation: fadeIn 1s ease-in-out;
+}
