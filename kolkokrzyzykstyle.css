@@ -1,6 +1,6 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
+    background: linear-gradient(135deg, #6e45e2, #88d3ce);
     margin: 0;
     padding: 0;
     display: flex;
@@ -40,6 +40,7 @@ button {
     cursor: pointer;
     border-radius: 4px;
     margin-left: 10px;
+    margin-right: 10px;
     transition: background-color 0.3s;
 }
 
@@ -107,7 +108,7 @@ button:hover {
 }
 
 .popup p {
-    margin: 0 0 20px;
+    margin: 20px 20px 20px;
 }
 
 #new-game {
