@@ -1,54 +1,74 @@
 body {
     font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #6e45e2, #88d3ce);
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
-    background-color: #f1f1f1;
+    color: #fff;
 }
 
 .container {
     text-align: center;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    max-width: 600px;
+    width: 90%;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
 }
 
 .tabs {
     overflow: hidden;
-    background-color: #f1f1f1;
+    background-color: transparent;
     margin-bottom: 20px;
+    border-bottom: 2px solid #ddd;
 }
 
 .tablink {
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.8);
     border: none;
     outline: none;
-    padding: 10px 20px;
+    padding: 12px 20px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s;
-    border-bottom: 2px solid transparent;
+    transition: transform 0.2s, background-color 0.3s;
+    border-radius: 5px;
+    margin: 10px 5px;
 }
 
 .tablink:hover {
-    background-color: #ddd;
+    transform: scale(1.05);
+    background-color: rgba(255, 255, 255, 1);
 }
 
 .tablink.active {
-    border-bottom: 2px solid #007bff;
+    background-color: #ff6f61;
+    color: #fff;
+    transform: scale(1.1);
 }
 
 .tabcontent {
     display: none;
     padding: 20px;
-    text-align: center;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    color: #333;
 }
 
 #polskaClock, #johannesburgClock, #nairobiClock, #beijingClock, #tokyoClock, #dubaiClock, #londonClock, #parisClock, #berlinClock, #newYorkClock, #torontoClock, #mexicoCityClock, #saoPauloClock, #buenosAiresClock, #sydneyClock, #aucklandClock {
     font-size: 24px;
-    color: #333333;
+    color: #333;
     margin-bottom: 10px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
 }
