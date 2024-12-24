@@ -1,100 +1,101 @@
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f4f4f4;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(135deg, #6e45e2, #88d3ce);
 }
 
 .containerkopiuj {
-    --color: #a5a5b0;
-    --size: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    cursor: pointer;
-    font-size: var(--size);
-    user-select: none;
-    fill: var(--color);
-    margin-right: 10px;
-    right: -10px;
-  }
-  
-  .containerkopiuj .clipboard {
-    position: absolute;
-    animation: keyframes-fill .5s;
-  }
-  
-  .containerkopiuj .clipboard-check {
-    position: absolute;
-    display: none;
-    animation: keyframes-fill .5s;
-  }
-  
-  /* ------ On check event ------ */
-  .containerkopiuj input:checked ~ .clipboard {
-    display: none;
-  }
-  
-  .containerkopiuj input:checked ~ .clipboard-check {
-    display: block;
-  }
-  
-  /* ------ Hide the default checkbox ------ */
-  .containerkopiuj input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-  
-  /* ------ Animation ------ */
-  @keyframes keyframes-fill {
-    0% {
+  --color: #a5a5b0;
+  --size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  font-size: var(--size);
+  user-select: none;
+  fill: var(--color);
+  margin-right: 10px;
+  right: -10px;
+}
+
+.containerkopiuj .clipboard {
+  position: absolute;
+  animation: keyframes-fill 0.5s;
+}
+
+.containerkopiuj .clipboard-check {
+  position: absolute;
+  display: none;
+  animation: keyframes-fill 0.5s;
+}
+
+.containerkopiuj input:checked ~ .clipboard {
+  display: none;
+}
+
+.containerkopiuj input:checked ~ .clipboard-check {
+  display: block;
+}
+
+.containerkopiuj input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+@keyframes keyframes-fill {
+  0% {
       transform: rotate(0deg) scale(0);
       opacity: 0;
-    }
-  
-    50% {
-      transform: rotate(-10deg) scale(1.2);
-    }
   }
 
+  50% {
+      transform: rotate(-10deg) scale(1.2);
+  }
+}
+
 .container {
-    text-align: center;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 90%;
 }
 
 .slider-container {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .slider {
-    width: 200px;
+  width: 200px;
+  margin-top: 10px;
 }
 
 .color-box {
-    width: 200px;
-    height: 200px;
-    margin: 20px auto;
-    border: 1px solid #000;
+  width: 200px;
+  height: 200px;
+  margin: 20px auto;
+  border: 1px solid #000;
+  border-radius: 8px;
 }
 
 .copy-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 #copy {
-    flex: 1;
-    margin-right: 10px;
+  flex: 1;
+  margin-right: 10px;
 }
