@@ -303,10 +303,25 @@ body{
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .about-right {
+        padding: 10px;
+    }
+
+    .containersub {
+        margin-bottom: 20px;
+        max-height: fit-content;
+    }
+
+    .counter {
+        font-size: 1.8rem;
     }
 
     .btn {
-        width: auto;
+        width: 100%;
+        margin: 0;
     }
 }
 
