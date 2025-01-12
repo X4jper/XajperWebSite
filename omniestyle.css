@@ -298,6 +298,18 @@ body{
     }
 }
 
+@media (max-width: 768px) {
+    .about-btns {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .btn {
+        width: auto;
+    }
+}
+
 @media screen and (min-width: 992px){
     .about-wrapper{
         display: grid;
