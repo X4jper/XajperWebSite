@@ -298,33 +298,6 @@ body{
     }
 }
 
-@media (max-width: 768px) {
-    .about-btns {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        margin-bottom: 10px;
-    }
-
-    .about-right {
-        padding: 10px;
-    }
-
-    .containersub {
-        margin-bottom: 20px;
-        max-height: fit-content;
-    }
-
-    .counter {
-        font-size: 1.8rem;
-    }
-
-    .btn {
-        width: 100%;
-        margin: 0;
-    }
-}
-
 @media screen and (min-width: 992px){
     .about-wrapper{
         display: grid;
