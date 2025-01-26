@@ -10,6 +10,14 @@ var matchData = {
         redCards: 0,
         score: 0,
         spalone: 0,
+        shotsOffTarget: 0,
+        dribbles: 0,
+        clearances: 0,
+        foulsCommitted: 0,
+        tackles: 0,
+        passesCompleted: 0,
+        goalsConceded: 0,
+        saves: 0,
     },
     team2: {
         name: "",
@@ -21,6 +29,14 @@ var matchData = {
         redCards: 0,
         score: 0,
         spalone: 0,
+        shotsOffTarget: 0,
+        dribbles: 0,
+        clearances: 0,
+        foulsCommitted: 0,
+        tackles: 0,
+        passesCompleted: 0,
+        goalsConceded: 0,
+        saves: 0,
     },
     location: "",
     score: { team1: 0, team2: 0 },
@@ -53,11 +69,11 @@ function blokujKlawisze(event) {
         event.preventDefault();
     }
 }
-  
+
 document.addEventListener('mousedown', blokujMysz);
-  
+
 document.addEventListener('keydown', blokujKlawisze);
-  
+
 document.addEventListener('contextmenu', function (event) {
     event.preventDefault();
 });
@@ -73,8 +89,21 @@ function initializePlayers(team) {
         yellowCards: 0,
         redCards: 0,
         goals: 0,
-        injury: false, // Ustal, czy zawodnik ma kontuzję
-        isRedCarded: false // Ustal, czy zawodnik ma czerwoną kartkę
+        assists: 0,
+        injury: false,
+        isRedCarded: false,
+        isYellowCarded: false,
+        substituted: false,
+        rating: 6.5,
+        minutesPlayed: 0,
+        shotsOffTarget: 0,
+        dribbles: 0,
+        clearances: 0,
+        foulsCommitted: 0,
+        tackles: 0,
+        passesCompleted: 0,
+        goalsConceded: 0,
+        saves: 0,
     });
 
     // Dodaj obrońców
@@ -85,8 +114,21 @@ function initializePlayers(team) {
             yellowCards: 0,
             redCards: 0,
             goals: 0,
+            assists: 0,
             injury: false,
-            isRedCarded: false
+            isRedCarded: false,
+            isYellowCarded: false,
+            substituted: false,
+            rating: 6.5,
+            minutesPlayed: 0,
+            shotsOffTarget: 0,
+            dribbles: 0,
+            clearances: 0,
+            foulsCommitted: 0,
+            tackles: 0,
+            passesCompleted: 0,
+            goalsConceded: 0,
+            saves: 0,
         });
     }
 
@@ -98,8 +140,21 @@ function initializePlayers(team) {
             yellowCards: 0,
             redCards: 0,
             goals: 0,
+            assists: 0,
             injury: false,
-            isRedCarded: false
+            isRedCarded: false,
+            isYellowCarded: false,
+            substituted: false,
+            rating: 6.5,
+            minutesPlayed: 0,
+            shotsOffTarget: 0,
+            dribbles: 0,
+            clearances: 0,
+            foulsCommitted: 0,
+            tackles: 0,
+            passesCompleted: 0,
+            goalsConceded: 0,
+            saves: 0,
         });
     }
 
@@ -111,8 +166,21 @@ function initializePlayers(team) {
             yellowCards: 0,
             redCards: 0,
             goals: 0,
+            assists: 0,
             injury: false,
-            isRedCarded: false
+            isRedCarded: false,
+            isYellowCarded: false,
+            substituted: false,
+            rating: 6.5,
+            minutesPlayed: 0,
+            shotsOffTarget: 0,
+            dribbles: 0,
+            clearances: 0,
+            foulsCommitted: 0,
+            tackles: 0,
+            passesCompleted: 0,
+            goalsConceded: 0,
+            saves: 0,
         });
     }
 
@@ -123,6 +191,7 @@ function initializePlayers(team) {
             yellowCards: 0,
             redCards: 0,
             isRedCarded: false,
+            isYellowCarded: false,
             experience: 0, // Możesz dodać więcej właściwości, np. doświadczenie
             strategy: "Ofensywna", // Możesz ustawić strategię trenera
         });
@@ -432,6 +501,8 @@ function updateStats() {
     document.getElementById("shots-team2").innerText = matchData.team2.shots;
     document.getElementById("spalone-team2").innerText = matchData.team1.spalone;
     document.getElementById("spalone-team2").innerText = matchData.team2.spalone;
+    document.getElementById("celnepodania-team1").innerText = matchData.team1.passesCompleted;
+    document.getElementById("celnepodania-team2").innerText = matchData.team2.passesCompleted;
 }
 
 function showPlayerStats(player) {
@@ -444,24 +515,46 @@ function showPlayerStats(player) {
         document.body.appendChild(modal);
     }
 
-    // Populate the modal with player stats
+    const imgStyles = 'width: 16px; height: 16px; vertical-align: middle; margin-left: 5px; filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.3));';
+
+    // Upewniamy się, że rating jest liczbą
+    const rating = parseFloat(player.rating) || 6.5;  // Domyślnie 6.5, jeśli rating nie jest liczbą
+
+    // Kolorowanie oceny
+    const ratingColor = getRatingColor(rating); // Pobranie koloru na podstawie oceny
+    const ratingSpan = `<span class="rating" style="background-color: ${ratingColor}; color: white; padding: 3px 8px; border-radius: 5px; font-weight: bold; font-size: 14px; display: inline-block; vertical-align: middle;">${rating.toFixed(1)}</span>`;
+
     modal.innerHTML = `
         <div class="modal-content">
             <span class="close" onclick="closePlayerStats()">&times;</span>
-            <h2>${player.name} (<em>${player.position}</em>)</h2>
-            <p>Gole: <strong>${player.goals}</strong> <img src="zdobytygol.png" style="width: 16px; height: 16px; margin-left: 5px;" alt="Zdobyty gol" /></p>
-            <p>Żółte kartki: <strong>${player.yellowCards}</strong> <img src="yellow_card.png" style="width: 16px; height: 16px; margin-left: 5px;" alt="Żółta kartka" /></p>
-            <p>Czerwone kartki: <strong>${player.redCards}</strong> <img src="red_card.png" style="width: 16px; height: 16px; margin-left: 5px;" alt="Czerwona kartka" /></p>
-            <p>Kontuzjowany: ${player.injury ? "<strong>Tak</strong>" : "<strong>Nie</strong>"} <img src="injury_icon.png" style="width: 16px; height: 16px; margin-left: 5px;" alt="Kontuzja" /></p>
-            <p>Zmieniony: ${player.substituted ? "<strong>Tak</strong>" : "<strong>Nie</strong>"} <img src="zmiana.png" style="width: 16px; height: 16px; margin-left: 5px;" alt="Zmieniony" /></p>
+            <div style="display: flex; align-items: center;">
+                <h2 style="margin-right: 10px;">${player.name} (<em>${player.position}</em>)</h2>
+                ${ratingSpan}
+            </div>
+            <p>Gole: <strong>${player.goals}</strong> <img src="zdobytygol.png" style="${imgStyles}" alt="Zdobyty gol" /></p>
+            <p>Asysty: <strong>${player.assists}</strong> <img src="asysta.png" style="${imgStyles}" alt="Asysta" /></p>
+            <p>Żółte kartki: <strong>${player.yellowCards}</strong> <img src="yellow_card.png" style="${imgStyles}" alt="Żółta kartka" /></p>
+            <p>Czerwone kartki: <strong>${player.redCards}</strong> <img src="red_card.png" style="${imgStyles}" alt="Czerwona kartka" /></p>
+            <p>Rozegrane minuty: <strong>${player.minutesPlayed}</strong> <img src="minuty.png" style="${imgStyles}" alt="Rozegrane minuty" /></p>
+            <p>Celne podania: <strong>${player.passesCompleted}</strong> <img src="podania.png" style="${imgStyles}" alt="Celne podania" /></p>
+            <p>Wślizgi: <strong>${player.tackles}</strong> <img src="wślizg.png" style="${imgStyles}" alt="Wślizgi" /></p>
+            <p>Faule: <strong>${player.foulsCommitted}</strong> <img src="faul.png" style="${imgStyles}" alt="Faule" /></p>
+            <p>Odbiory: <strong>${player.clearances}</strong> <img src="odbiór.png" style="${imgStyles}" alt="Odbiory" /></p>
+
+            ${player.position === 'Bramkarz' ? ` 
+                <p>Obrony: <strong>${player.saves}</strong> <img src="obrony.png" style="${imgStyles}" alt="Obrony" /></p>
+            ` : ` 
+                <p>Dryblingi: <strong>${player.dribbles}</strong> <img src="drybling.png" style="${imgStyles}" alt="Dryblingi" /></p>
+            `}
+
+            <p>Kontuzjowany: ${player.injury ? "<strong>Tak</strong>" : "<strong>Nie</strong>"} <img src="injury_icon.png" style="${imgStyles}" alt="Kontuzja" /></p>
+            <p>Zmieniony: ${player.substituted ? "<strong>Tak</strong>" : "<strong>Nie</strong>"} <img src="zmiana.png" style="${imgStyles}" alt="Zmieniony" /></p>
         </div>
     `;
-    
-    // Display the modal
+
     modal.style.display = "block";
 }
 
-// Function to close the modal
 function closePlayerStats() {
     let modal = document.getElementById("playerStatsModal");
     if (modal) {
@@ -477,6 +570,121 @@ function addPlayerClickEvents(team, containerId) {
     });
 }
 
+// Funkcja aktualizująca ocenę gracza na podstawie zdarzeń
+function updatePlayerRating(player) {
+    let rating = 6.5; // Początkowa ocena
+
+    // Upewnij się, że wszystkie właściwości są zdefiniowane i mają wartości domyślne
+    const goals = player.goals || 0;
+    const assists = player.assists || 0;
+    const isRedCarded = player.isRedCarded ? 1 : 0;
+    const goalsConceded = player.goalsConceded || 0;
+    const saves = player.saves || 0;
+    const shotsOnTarget = player.shotsOnTarget || 0;
+    const passesCompleted = player.passesCompleted || 0;
+    const tackles = player.tackles || 0;
+    const foulsCommitted = player.foulsCommitted || 0;
+    const clearances = player.clearances || 0;
+    const dribbles = player.dribbles || 0;
+    const shotsOffTarget = player.shotsOffTarget || 0;
+    const isYellowCarded = player.isYellowCarded || 0;
+    const minutesPlayed = player.minutesPlayed || 0;
+
+    rating += goals * 2;
+    rating += assists * 1;
+    rating += passesCompleted * 0.01;
+    rating += tackles * 0.2;
+    rating -= foulsCommitted * 0.2;
+    rating += clearances * 0.3;
+    rating += dribbles * 0.2;
+    rating -= shotsOffTarget * 0.1;
+    rating -= isRedCarded * 2;
+    rating -= isYellowCarded * 0.5;
+    if (minutesPlayed < 60) {
+        player.rating -= 1;
+    }
+
+    if (player.position === 'Bramkarz') {
+        rating -= goalsConceded * 1;
+        rating += saves * 0.5;
+    } else {
+        rating += shotsOnTarget * 0.5;
+    }
+
+    // Upewnij się, że ocena mieści się w przedziale 1-10
+    rating = Math.max(1, Math.min(rating, 10));
+
+    // Zawsze wyświetl ocenę z jednym miejscem po przecinku
+    player.rating = rating.toFixed(1);
+}
+
+function animateRating(element, from, to) {
+    let start = from;
+    const duration = 1000; // Czas trwania animacji (1 sekunda)
+    const stepTime = 30; // Co ile ms ma się zmieniać liczba
+    const steps = Math.abs(to - from) / 10; // Ilość kroków do osiągnięcia celu
+
+    const step = () => {
+        if (start < to) {
+            start = Math.min(to, start + steps);
+        } else {
+            start = Math.max(to, start - steps);
+        }
+
+        element.innerHTML = start.toFixed(1); // Zmieniamy wartość z jedną cyfrą po przecinku
+
+        if (start !== to) {
+            requestAnimationFrame(step); // Kontynuowanie animacji
+        }
+    };
+
+    step(); // Rozpoczęcie animacji
+}
+
+function animateRating(element, from, to) {
+    let start = from;
+    const duration = 1000; // Czas trwania animacji (1 sekunda)
+    const stepTime = 30; // Co ile ms ma się zmieniać liczba
+    const steps = Math.abs(to - from) / 10; // Ilość kroków do osiągnięcia celu
+
+    const step = () => {
+        if (start < to) {
+            start = Math.min(to, start + steps);
+        } else {
+            start = Math.max(to, start - steps);
+        }
+
+        element.innerHTML = start.toFixed(1); // Zmieniamy wartość z jedną cyfrą po przecinku
+
+        if (start !== to) {
+            requestAnimationFrame(step); // Kontynuowanie animacji
+        }
+    };
+
+    step(); // Rozpoczęcie animacji
+}
+
+function animateRating(element, startRating, endRating) {
+    const duration = 500; // Czas trwania animacji w milisekundach
+    const frameDuration = 1000 / 60; // Liczba klatek na sekundę
+    const totalFrames = Math.round(duration / frameDuration); // Całkowita liczba klatek
+    const increment = (endRating - startRating) / totalFrames; // Zmiana oceny na klatkę
+
+    let currentRating = startRating;
+    let frame = 0;
+
+    const animation = setInterval(() => {
+        currentRating += increment;
+        frame++;
+        element.textContent = currentRating.toFixed(1);
+
+        if (frame >= totalFrames) {
+            clearInterval(animation);
+            element.textContent = endRating.toFixed(1); // Ustaw końcową wartość oceny
+        }
+    }, frameDuration);
+}
+
 function displayPlayers(team, containerId) {
     let container = document.getElementById(containerId);
 
@@ -485,73 +693,89 @@ function displayPlayers(team, containerId) {
         return;
     }
 
-    container.innerHTML = ''; // Clear the container
+    container.innerHTML = ''; // Wyczyść zawartość kontenera
 
     team.players.forEach(player => {
+        const oldRating = player.rating != null ? parseFloat(player.rating) : 6.5; // Zachowaj starą ocenę gracza i upewnij się, że jest liczbą
+        updatePlayerRating(player);  // Aktualizacja oceny gracza
+
         let playerItem = document.createElement('li');
 
+        // Kolorowanie oceny
+        const ratingColor = getRatingColor(player.rating);  // Pobranie koloru na podstawie oceny
+
+        // Wyświetlenie nazwy gracza oraz jego oceny z odpowiednim kolorem
+        let ratingSpan = document.createElement('span');
+        ratingSpan.classList.add('rating');
+        ratingSpan.style.backgroundColor = ratingColor;
+        ratingSpan.textContent = oldRating.toFixed(1); // Ustaw początkową ocenę
+
+        playerItem.innerHTML = `${player.name} - `;
+        playerItem.appendChild(ratingSpan);
+
+        // Animacja zmiany oceny tylko wtedy, gdy ocena się zmienia
+        if (oldRating !== player.rating) {
+            animateRating(ratingSpan, oldRating, parseFloat(player.rating));
+        } else {
+            ratingSpan.textContent = player.rating.toFixed(1); // Ustaw ocenę bez animacji, jeśli się nie zmienia
+        }
+
+        // Jeśli gracz ma czerwoną kartkę, przekreślamy jego nazwisko
         if (player.isRedCarded) {
-            playerItem.innerHTML = `<s>${player.name}</s>`; // Strike-through for red-carded players
-        } else if (player.injury) {
-            let injuryPart = getRandomInjuryPart(); // Get a random injury part
-            playerItem.innerHTML = `<s>${player.name}</s> <img src="injury_icon.png" style="width: 16px; height: 16px; margin-left: 5px;" title="Kontuzja: ${injuryPart}" alt="Kontuzja">`;
-            
-            // Display substitution icon next to the injury icon
+            playerItem.innerHTML = `<s>${player.name}</s> - <span class="rating" style="background-color:${ratingColor}; color:white;">${player.rating}</span>`;
+        }
+
+        // Jeśli gracz ma kontuzję, wyświetlamy odpowiednią ikonkę kontuzji
+        if (player.injury) {
+            let injuryPart = getRandomInjuryPart(); // Losowanie części ciała, która jest kontuzjowana
+            playerItem.innerHTML += ` <img src="injury_icon.png" style="width: 16px; height: 16px; margin-left: 5px;" title="Kontuzja: ${injuryPart}" alt="Kontuzja">`;
+
+            // Jeśli gracz został zmieniony z powodu kontuzji, wyświetlamy ikonę zmiany
             if (player.substitutedBy) {
                 playerItem.innerHTML += ` <img src="zmiana.png" style="width: 16px; height: 16px; margin-left: 5px;" title="Zmieniony przez: ${player.substitutedBy}" alt="Zmiana">`;
             }
-        } else {
-            playerItem.innerHTML = `${player.name}`; // Normal display for active players
-        }
-        
-        // If the player was substituted (even if no injury), add the substitution icon
-        if (player.substituted && player.substitutedBy && !player.injury) {
-            playerItem.innerHTML += ` <img src="zmiana.png" style="width: 16px; height: 16px; margin-left: 5px;" title="Zmieniony przez: ${player.substitutedBy}" alt="Zmiana">`;
         }
 
-        // Display goals
+        // Stylizacja zdjęć
+        const imgStyles = 'width: 16px; height: 16px; vertical-align: middle; margin-left: 5px; filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.3));';
+
+        // Wyświetlanie bramek
         for (let i = 0; i < player.goals; i++) {
             let goalImg = document.createElement('img');
-            goalImg.src = 'zdobytygol.png'; // Make sure this is the correct image
-            goalImg.style.width = '16px'; // Slightly smaller size
-            goalImg.style.height = '16px';
-            goalImg.style.verticalAlign = 'middle'; // Center vertically with text
-            goalImg.style.marginLeft = '5px'; // Add spacing
+            goalImg.src = 'zdobytygol.png';  // Obrazek reprezentujący zdobycie bramki
+            goalImg.style.cssText = imgStyles;
             playerItem.appendChild(goalImg);
         }
 
-        // Display yellow cards
+        // Wyświetlanie żółtych kartek
         for (let i = 0; i < player.yellowCards; i++) {
             let yellowCardImg = document.createElement('img');
             yellowCardImg.src = 'yellow_card.png';
-            yellowCardImg.style.width = '16px'; // Slightly smaller size
-            yellowCardImg.style.height = '16px';
-            yellowCardImg.style.verticalAlign = 'middle'; // Center vertically with text
-            yellowCardImg.style.marginLeft = '5px'; // Add spacing
+            yellowCardImg.style.cssText = imgStyles;
             playerItem.appendChild(yellowCardImg);
         }
 
-        // Display red cards
+        // Wyświetlanie czerwonych kartek
         if (player.isRedCarded) {
             let redCardImg = document.createElement('img');
             redCardImg.src = 'red_card.png';
-            redCardImg.style.width = '16px'; // Slightly smaller size
-            redCardImg.style.height = '16px';
-            redCardImg.style.verticalAlign = 'middle'; // Center vertically with text
-            redCardImg.style.marginLeft = '5px'; // Add spacing
+            redCardImg.style.cssText = imgStyles;
             playerItem.appendChild(redCardImg);
         }
 
+        // Dodanie elementu gracza do kontenera
         container.appendChild(playerItem);
     });
 
     addPlayerClickEvents(team, containerId);
 
+    // Dodanie separatora przed sztabem trenerskim
     let separator = document.createElement('li');
     separator.style.listStyleType = 'none';
     separator.style.height = '10px';
     container.appendChild(separator);
 
+    // Wyświetlanie członków sztabu trenerskiego
     team.sztab.forEach(staff => {
         let staffItem = document.createElement('li');
         staffItem.style.listStyleType = 'none';
@@ -560,6 +784,41 @@ function displayPlayers(team, containerId) {
     });
 }
 
+// Funkcja do uzyskania koloru oceny z lepszymi odcieniami
+function getRatingColor(rating) {
+    if (rating >= 10) {
+        return "#1E90FF";  // Royal Blue dla oceny 10
+    } else if (rating >= 8 && rating < 10) {
+        return "#00BFFF";  // Deep Sky Blue dla ocen 8-9
+    } else if (rating >= 7 && rating < 8) {
+        return "#32CD32";  // Lime Green dla ocen 7-7.9
+    } else if (rating >= 6.5 && rating < 7) {
+        return "#FFD700";  // Złote tło dla ocen 6.5-6.9
+    } else if (rating >= 6 && rating < 6.5) {
+        return "#FF8C00";  // Dark Orange dla ocen 6-6.4
+    } else {
+        return "#FF4500";  // Orange Red dla ocen poniżej 6
+    }
+}
+
+// Funkcja do uzyskania koloru oceny z lepszymi odcieniami
+function getRatingColor(rating) {
+    if (rating >= 10) {
+        return "#1E90FF";  // Royal Blue dla oceny 10
+    } else if (rating >= 8 && rating < 10) {
+        return "#00BFFF";  // Deep Sky Blue dla ocen 8-9
+    } else if (rating >= 7 && rating < 8) {
+        return "#32CD32";  // Lime Green dla ocen 7-7.9
+    } else if (rating >= 6.5 && rating < 7) {
+        return "#FFD700";  // Złote tło dla ocen 6.5-6.9
+    } else if (rating >= 6 && rating < 6.5) {
+        return "#FF8C00";  // Dark Orange dla ocen 6-6.4
+    } else {
+        return "#FF4500";  // Orange Red dla ocen poniżej 6
+    }
+}
+
+// Funkcja do losowania części ciała, która jest kontuzjowana
 function getRandomInjuryPart() {
     const injuryParts = ["uda", "kolana", "kostki", "plecy", "ramiona"];
     return injuryParts[Math.floor(Math.random() * injuryParts.length)];
@@ -570,48 +829,116 @@ function substitutePlayer(playerOut, playerIn) {
     playerOut.substitutedBy = playerIn.name;
 }
 
+function displayPlayerList(team) {
+    return team.players.map(player => {
+        const ratingColor = getRatingColor(player.rating);  // Ustawienie koloru oceny
+        return `${player.name} - <span style="background-color:${ratingColor}; color:white; padding: 0 5px; border-radius: 5px;">${player.rating}</span>`;
+    }).join('<br>');  // Zwrócenie listy z graczami i ocenami w formie HTML
+}
+
 function displayEvents() {
     var eventsContainer = document.getElementById("events");
     eventsContainer.innerHTML = `<h2><img src="events.png" style="width: 20px; height: 20px; margin-bottom: -5px; margin-right: 5px;">Aktualne wydarzenia:</h2>`;
 
     matchData.events.forEach((eventData) => {
-        var eventMinute = eventData.minute || matchData.currentMinute; // Use the event minute or current minute
+        var eventMinute = eventData.minute || matchData.currentMinute;
         var formattedTime = formatTime(eventMinute);
         eventsContainer.innerHTML += `<p>${formattedTime} ${eventData.event}</p>`;
     });
 }
 
-function simulateEvent() {
-    if (team1Substitutions >= 5 && team2Substitutions >= 5) return;  // Limit substitutions to 5 per team
+const manipulationContainer = document.createElement('div');
+manipulationContainer.innerHTML = `
+    <div class="manipulation-form">
+        <label for="team-preference">Wybierz drużynę z przewagą: 💰</label>
+        <select id="team-preference">
+            <option value="">Brak preferencji</option>
+            <option value="team1">Drużyna 1</option>
+            <option value="team2">Drużyna 2</option>
+        </select>
+        <button onclick="setTeamPreference()">
+            <i class="fas fa-cogs"></i> Ustaw preferencję
+        </button>
+    </div>
+`;
 
-    // Substitutions for Team 1
-    if (matchData.currentMinute < 45 && Math.random() < 0.02 && team1Substitutions < 5) {  // Rare in the 1st half
-        let playerOut = matchData.team1.players[Math.floor(Math.random() * matchData.team1.players.length)];
-        let playerIn = { name: "Rezerwowy " + (team1Substitutions + 1), yellowCards: 0, redCards: 0, goals: 0, injury: false };
-        substitutePlayer(playerOut, playerIn);
-        team1Substitutions++;
-        logEvent(matchData.currentMinute, `・ Zmiana w ${matchData.team1.name}: ${playerOut.name} schodzi, wchodzi ${playerIn.name}`);
-    } else if (matchData.currentMinute >= 45 && Math.random() < 0.08 && team1Substitutions < 5) {  // More frequent in the 2nd half
-        let playerOut = matchData.team1.players[Math.floor(Math.random() * matchData.team1.players.length)];
-        let playerIn = { name: "Rezerwowy " + (team1Substitutions + 1), yellowCards: 0, redCards: 0, goals: 0, injury: false };
-        substitutePlayer(playerOut, playerIn);
-        team1Substitutions++;
-        logEvent(matchData.currentMinute, `・ Zmiana w ${matchData.team1.name}: ${playerOut.name} schodzi, wchodzi ${playerIn.name}`);
+document.querySelector('.container').prepend(manipulationContainer);
+
+let teamPreference = "";
+
+function setTeamPreference() {
+    const selectElement = document.getElementById('team-preference');
+    teamPreference = selectElement.value;
+    alert(`Preferencja ustawiona na: ${teamPreference || 'brak'}`);
+}
+
+function simulateEvent() {
+    if (team1Substitutions >= 5 && team2Substitutions >= 5) return;
+
+    matchData.team1.players.forEach(player => {
+        if (!(player.injury || player.isRedCarded || player.substituted || player.hasBeenInjuredOrCarded)) { // Only players who haven't been substituted
+            player.minutesPlayed += 1;
+        }
+    });
+
+    matchData.team2.players.forEach(player => {
+        if (!(player.injury || player.isRedCarded || player.substituted || player.hasBeenInjuredOrCarded)) { // Only players who haven't been substituted
+            player.minutesPlayed += 1;
+        }
+    });
+
+    // Substitutions for Team 1 (frequent after 45 minutes)
+    if (matchData.currentMinute >= 45 && Math.random() < 0.08 && team1Substitutions < 5) {
+        let playerOut = matchData.team1.players.filter(player => !(player.injury || player.isRedCarded || player.substituted || player.hasBeenInjuredOrCarded))[Math.floor(Math.random() * matchData.team1.players.length)];
+        if (playerOut) {
+            let playerIn = { 
+                name: "Rezerwowy " + (team1Substitutions + 1), 
+                yellowCards: 0, 
+                redCards: 0, 
+                goals: 0,
+                assists: 0, 
+                injury: false,
+                minutesPlayed: 0, // Dodaj statystykę minut
+                shotsOffTarget: 0, // Dodaj statystykę strzałów niecelnych
+                dribbles: 0, // Dodaj statystykę dryblingów
+                clearances: 0, // Dodaj statystykę wybicia piłki
+                foulsCommitted: 0, // Dodaj statystykę fauli
+                tackles: 0, // Dodaj statystykę odbiorów
+                passesCompleted: 0, // Dodaj statystykę udanych podań
+                goalsConceded: 0,
+                saves: 0
+            };
+            substitutePlayer(playerOut, playerIn);
+            team1Substitutions++;
+            logEvent(matchData.currentMinute, `Zmiana w ${matchData.team1.name}: ${playerOut.name} schodzi, wchodzi ${playerIn.name}`);
+        }
     }
-    
-    // Substitutions for Team 2
-    if (matchData.currentMinute < 45 && Math.random() < 0.02 && team2Substitutions < 5) {  // Rare in the 1st half
-        let playerOut = matchData.team2.players[Math.floor(Math.random() * matchData.team2.players.length)];
-        let playerIn = { name: "Rezerwowy " + (team2Substitutions + 1), yellowCards: 0, redCards: 0, goals: 0, injury: false };
-        substitutePlayer(playerOut, playerIn);
-        team2Substitutions++;
-        logEvent(matchData.currentMinute, `・ Zmiana w ${matchData.team2.name}: ${playerOut.name} schodzi, wchodzi ${playerIn.name}`);
-    } else if (matchData.currentMinute >= 45 && Math.random() < 0.08 && team2Substitutions < 5) {  // More frequent in the 2nd half
-        let playerOut = matchData.team2.players[Math.floor(Math.random() * matchData.team2.players.length)];
-        let playerIn = { name: "Rezerwowy " + (team2Substitutions + 1), yellowCards: 0, redCards: 0, goals: 0, injury: false };
-        substitutePlayer(playerOut, playerIn);
-        team2Substitutions++;
-        logEvent(matchData.currentMinute, `・ Zmiana w ${matchData.team2.name}: ${playerOut.name} schodzi, wchodzi ${playerIn.name}`);
+
+    // Substitutions for Team 2 (frequent after 45 minutes)
+    if (matchData.currentMinute >= 45 && Math.random() < 0.08 && team2Substitutions < 5) {
+        let playerOut = matchData.team2.players.filter(player => !(player.injury || player.isRedCarded || player.substituted || player.hasBeenInjuredOrCarded))[Math.floor(Math.random() * matchData.team2.players.length)];
+        if (playerOut) {
+            let playerIn = { 
+                name: "Rezerwowy " + (team2Substitutions + 1), 
+                yellowCards: 0, 
+                redCards: 0, 
+                goals: 0, 
+                assists: 0,
+                injury: false,
+                minutesPlayed: 0, // Dodaj statystykę minut
+                shotsOffTarget: 0, // Dodaj statystykę strzałów niecelnych
+                dribbles: 0, // Dodaj statystykę dryblingów
+                clearances: 0, // Dodaj statystykę wybicia piłki
+                foulsCommitted: 0, // Dodaj statystykę fauli
+                tackles: 0, // Dodaj statystykę odbiorów
+                passesCompleted: 0, // Dodaj statystykę udanych podań
+                goalsConceded: 0,
+                saves: 0
+            };
+            substitutePlayer(playerOut, playerIn);
+            team2Substitutions++;
+            logEvent(matchData.currentMinute, `Zmiana w ${matchData.team2.name}: ${playerOut.name} schodzi, wchodzi ${playerIn.name}`);
+        }
     }
 
     // Check if the match has ended
@@ -619,18 +946,24 @@ function simulateEvent() {
         return; // Match ended, do not add new events
     }
 
-    // Filter out players who are injured or have received a red card
-    let availablePlayersTeam1 = matchData.team1.players.filter(player => !player.injury && !player.isRedCarded);
-    let availablePlayersTeam2 = matchData.team2.players.filter(player => !player.injury && !player.isRedCarded);
+    let availablePlayersTeam1 = matchData.team1.players.filter(player => 
+        !(player.injury || player.isRedCarded || player.substituted || player.hasBeenInjuredOrCarded)
+    );
+    
+    let availablePlayersTeam2 = matchData.team2.players.filter(player => 
+        !(player.injury || player.isRedCarded || player.substituted || player.hasBeenInjuredOrCarded)
+    );
 
-    // Combine available players from both teams
     let availablePlayers = [...availablePlayersTeam1, ...availablePlayersTeam2];
+    if (availablePlayers.length === 0) return;
 
-    if (availablePlayers.length === 0) {
-        return; // No available players, nothing to simulate
+    // Uwzględnienie preferencji drużyny przy wyborze zawodnika
+    if (teamPreference === 'team1' && availablePlayersTeam1.length > 0) {
+        availablePlayers = availablePlayersTeam1;
+    } else if (teamPreference === 'team2' && availablePlayersTeam2.length > 0) {
+        availablePlayers = availablePlayersTeam2;
     }
 
-    // Randomly select a player from the available players list
     let randomPlayer = availablePlayers[Math.floor(Math.random() * availablePlayers.length)];
     var players = ["Napastnik 1", "Napastnik 2", "Pomocnik 1", "Pomocnik 2", "Pomocnik 3", "Pomocnik 4", "Obrońca 1", "Obrońca 2", "Obrońca 3", "Obrońca 4", "Bramkarz"];
     var randomPlayerIndex = Math.floor(Math.random() * players.length);
@@ -658,12 +991,70 @@ function simulateEvent() {
 
     let probabilitySubstitution = 0.1; // Probability for substitution
 
+    updatePlayerRating(randomPlayer);
     updatePossession();
     checkForWalkover();
 
     // Randomly determine the event
     var randomNum = Math.random();
     var randomEvent = '';
+
+    if (Math.random() < 0.1) { // Możesz dostosować prawdopodobieństwo
+        randomPlayer.dribbles += 1; // Zwiększenie statystyki dryblingów
+        if (scoringTeam === matchData.team1.name) {
+            matchData.team1.dribbles += 1;
+        } else {
+            matchData.team2.dribbles += 1;
+        }
+    }
+
+    if (randomPlayer.position === "Obrońca" && Math.random() < 0.05) { // Możesz dostosować prawdopodobieństwo
+        randomPlayer.clearances += 1; // Zwiększenie statystyki wybicia piłki
+        if (scoringTeam === matchData.team1.name) {
+            matchData.team1.clearances += 1;
+        } else {
+            matchData.team2.clearances += 1;
+        }
+    }
+
+    if (Math.random() < 0.1) { // Możesz dostosować prawdopodobieństwo
+        randomPlayer.foulsCommitted += 1; // Zwiększenie statystyki fauli
+        if (scoringTeam === matchData.team1.name) {
+            matchData.team1.foulsCommitted += 1;
+        } else {
+            matchData.team2.foulsCommitted += 1;
+        }
+    }
+
+    if (Math.random() < 0.15) { // Możesz dostosować prawdopodobieństwo
+        randomPlayer.tackles += 1; // Zwiększenie statystyki odbiorów piłki
+        if (scoringTeam === matchData.team1.name) {
+            matchData.team1.tackles += 1;
+        } else {
+            matchData.team2.tackles += 1;
+        }
+    }
+
+    if (Math.random() < 0.6) { // Możesz dostosować prawdopodobieństwo
+        const randomPasses = Math.floor(Math.random() * 5) + 5;
+
+        randomPlayer.passesCompleted += randomPasses;
+        if (scoringTeam === matchData.team1.name) {
+            matchData.team1.passesCompleted += randomPasses;
+        } else {
+            matchData.team2.passesCompleted += randomPasses;
+        }
+    }
+
+    if (randomNum < probabilityGoal + probabilityYellowCard + probabilityRedCard + probabilityInjury + probabilityShot) {
+        // Strzał niecelny
+        randomPlayer.shotsOffTarget += 1;
+        if (scoringTeam === matchData.team1.name) {
+            matchData.team1.shotsOffTarget += 1;
+        } else {
+            matchData.team2.shotsOffTarget += 1;
+        }
+    }
 
     if (randomNum < probabilitySubstitution) {
         // Select a player to substitute
@@ -695,17 +1086,18 @@ function simulateEvent() {
     }
 
     // Check for other events (goal, cards, etc.)
-    if (randomNum < probabilityGoal) {
+    if (Math.random() < probabilityGoal) {
         const goalEvents = [
             `Bramka! ${randomPlayer.name} <img src="gol.png" style="width: 20px; height: 20px; margin-bottom: -5px; margin-right: 5px;"> GOOOL (${scoringTeam})`,
             `Karny! Bramka! ${randomPlayer.name} <img src="gol.png" style="width: 20px; height: 20px; margin-bottom: -5px; margin-right: 5px;"> GOOOL (${scoringTeam})`,
             `Strzał zza pola karnego! ${randomPlayer.name} <img src="gol.png" style="width: 20px; height: 20px; margin-bottom: -5px; margin-right: 5px;"> GOOOL (${scoringTeam})`,
             `${randomPlayer.name} zdecydował się na strzał z dystansu, i piłka ląduje w siatce! Fantastyczny gol <img src="gol.png" style="width: 20px; height: 20px; margin-bottom: -5px; margin-right: 5px;"> GOOOL (${scoringTeam})`
         ];
+        
         randomEvent = goalEvents[Math.floor(Math.random() * goalEvents.length)];
         assignGoal(randomPlayer.name, scoringTeam); // Assign the goal
         scoringTeam.score += 1; // Update score
-
+    
         // Increase stats for the appropriate team
         if (scoringTeam === matchData.team1.name) {
             matchData.score.team1 += 1;
@@ -714,7 +1106,22 @@ function simulateEvent() {
             matchData.score.team2 += 1;
             matchData.team2.shots += 1; // Increase shots for team2
         }
-
+    
+        // 50% chance of assigning an assist to a different player
+        if (Math.random() < 0.5) {
+            // Filter out the player who scored the goal to prevent them from assisting themselves
+            const potentialAssistPlayers = scoringTeam.players.filter(player => player.name !== randomPlayer.name);
+            
+            // Randomly select an assist player
+            const assistPlayer = potentialAssistPlayers[Math.floor(Math.random() * potentialAssistPlayers.length)];
+    
+            // Record the assist event
+            randomEvent += ` Asysta/Wywalczony karny: ${assistPlayer.name} <img src="asysta.png" style="width: 16px; height: 16px; margin-left: 5px;" alt="Asysta">`;
+            
+            // Update the assist stat (add +1 to the assists for the player who assisted)
+            assignAssist(assistPlayer.name, scoringTeam); // Assign the assist
+        }
+    
     } else if (randomNum < probabilityGoal + probabilityYellowCard) {
         // Yellow card event
         const yellowCardEvents = [
@@ -755,8 +1162,9 @@ function simulateEvent() {
         
         randomEvent = injuryEvents[Math.floor(Math.random() * injuryEvents.length)];
         randomPlayer.injury = true; // Mark the player as injured
+        let substitutes = (scoringTeam === matchData.team1.name) ? matchData.team1.substitutes : matchData.team2.substitutes;
         let playerIn = substitutes[Math.floor(Math.random() * substitutes.length)];
-        substitutePlayer(randomPlayer, playerIn); // Correctly substitute the injured player
+        substitutePlayer(randomPlayer, playerIn);
 
     } else if (randomNum < probabilityGoal + probabilityYellowCard + probabilityRedCard + probabilityInjury + probabilityShot) {
         // Wybór zdarzenia związanego z niecelnym strzałem
@@ -848,7 +1256,6 @@ function simulateEvent() {
     logEvent(matchData.currentMinute, `・ ${randomEvent}`);
 }
 
-
 function isPlayerInGame(teamPlayers, playerName) {
     return teamPlayers.some(player => player.name === playerName);
 }
@@ -860,37 +1267,40 @@ function formatTime(minutes) {
 
 function assignGoal(playerName, teamName) {
     let team = teamName === matchData.team1.name ? matchData.team1 : matchData.team2;
-    let player = team.players.find(player => player.name === playerName);
-    
+    let player = team.players.find(player => player.name === playerName && !player.injury && !player.isRedCarded);
     if (player) {
-        player.goals += 1; // Zwiększa liczbę goli        
+        player.goals += 1;
         matchData.events.push(`Gol! ${playerName} zdobywa bramkę dla ${teamName}!`);
     } else {
-        console.error(`Zawodnik ${playerName} nie został znaleziony w drużynie ${teamName}`);
+        console.error(`Nie można przypisać gola dla ${playerName}, zawodnik nie jest aktywny.`);
+    }
+}
+
+function assignAssist(assistPlayerName, team) {
+    const player = team.players.find(player => player.name === assistPlayerName);
+    if (player) {
+        player.assists = (player.assists || 0) + 1;
     }
 }
 
 function assignCard(cardType, playerName, teamName) {
     let team = teamName === matchData.team1.name ? matchData.team1 : matchData.team2;
     let player = team.players.find(player => player.name === playerName);
-
-    if (player) {
+    if (player && !player.injury && !player.isRedCarded) {
         if (cardType === 'yellow') {
-            player.yellowCards += 1; // Zwiększa liczbę żółtych kartek
+            player.yellowCards += 1;
+            player.isYellowCarded = true;
             if (player.yellowCards === 2) {
-                player.redCards += 1; // Przypisz czerwoną kartkę
-                player.isRedCarded = true; // Oznacz, że zawodnik ma czerwoną kartkę
-                matchData.events.push(`Czerwona kartka dla ${playerName} (z powodu 2 żółtych)! (${teamName})`);
+                player.isRedCarded = true;
+                player.redCards += 1;
+                matchData.events.push(`Czerwona kartka dla ${playerName} (2 żółte)!`);
             } else {
-                matchData.events.push(`Żółta kartka dla ${playerName}! (${teamName})`);
+                matchData.events.push(`Żółta kartka dla ${playerName}!`);
             }
         } else if (cardType === 'red') {
-            player.redCards += 1; // Zwiększa liczbę czerwonych kartek
-            player.isRedCarded = true; // Oznacz, że zawodnik ma czerwoną kartkę
-            matchData.events.push(`Czerwona kartka dla ${playerName}! (${teamName})`);
+            player.isRedCarded = true;
+            matchData.events.push(`Czerwona kartka dla ${playerName}!`);
         }
-    } else {
-        console.error(`Zawodnik ${playerName} nie został znaleziony w drużynie ${teamName}`);
     }
 }
 
@@ -924,7 +1334,7 @@ function displayStats() {
     statsContainer.innerHTML = `<h2><img src="statystyki.png" style="width: 20px; height: 20px; margin-bottom: -5px; margin-right: 5px;">Statystyki:</h2>`;
     
     statsContainer.innerHTML +=
-        `<p><img src="posiadanie.png" style="width: 20px; height: 20px; margin-bottom: -5px; margin-right: 5px;">Posiadanie piłki: ${matchData.team1.possession}% - ${matchData.team2.possession}%</p>`;
+        `<p><img src="posiadanie.png" style="width: 20px; height: 20px; margin-bottom: -5px; margin-right: 5px;">Posiadanie piłki: ${Math.round(matchData.team1.possession)}% - ${Math.round(matchData.team2.possession)}%</p>`;
     
     statsContainer.innerHTML +=
         `<p><img src="yellow_card.png" style="width: 20px; height: 20px; margin-bottom: -5px; margin-right: 5px;">Żółte kartki: ${matchData.team1.yellowCards} - ${matchData.team2.yellowCards}</p>`;
@@ -937,6 +1347,9 @@ function displayStats() {
 
     statsContainer.innerHTML += 
         `<p><img src="spalony.png" style="width: 20px; height: 20px; margin-bottom: -5px; margin-right: 5px;">Spalone: ${matchData.team1.spalone} - ${matchData.team2.spalone}</p>`;
+
+    statsContainer.innerHTML += 
+        `<p><img src="podania.png" style="width: 20px; height: 20px; margin-bottom: -5px; margin-right: 5px;">Celne podania: ${matchData.team1.passesCompleted} - ${matchData.team2.passesCompleted}</p>`;
 }
 
 function updatePossession() {
@@ -1069,11 +1482,12 @@ function generateMatchDetails() {
     details += `Wynik: ${matchData.score.team1}:${matchData.score.team2}\n\n`;
 
     details += "Statystyki:\n";
-    details += `Posiadanie piłki: ${matchData.team1.possession.toFixed(1)}% - ${matchData.team2.possession.toFixed(1)}%\n`;
+    details += `Posiadanie piłki: ${Math.round(matchData.team1.possession)}% - ${Math.round(matchData.team2.possession)}%\n`;
     details += `Żółte kartki: ${matchData.team1.yellowCards} - ${matchData.team2.yellowCards}\n`;
     details += `Czerwone kartki: ${matchData.team1.redCards} - ${matchData.team2.redCards}\n`;
     details += `Strzały: ${matchData.team1.shots} - ${matchData.team2.shots}\n\n`;
     details += `Spalone: ${matchData.team1.spalone} - ${matchData.team2.spalone}\n\n`;
+    details += `Celne podania: ${matchData.team1.passesCompleted} - ${matchData.team2.passesCompleted}\n\n`;
 
     details += "Wydarzenia:\n";
     matchData.events.forEach(event => {
