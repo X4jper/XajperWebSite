@@ -10,6 +10,49 @@ body {
     justify-content: center;
 }
 
+.manipulation-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.775);
+    border-radius: 8px;
+    width: 300px;
+    margin: 10vh auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.manipulation-form label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+}
+
+.manipulation-form select {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.manipulation-form button {
+    padding: 10px 15px;
+    font-size: 14px;
+    color: white;
+    background: linear-gradient(to bottom, #3b45f8, #549eee);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, background-position 0.3s ease;
+    background-size: 100% 200%;
+    background-position: top;
+}
+
+.manipulation-form button:hover {
+    background-position: bottom;
+}
 
 .form {
     text-align: center;
@@ -18,14 +61,14 @@ body {
 
 .form label {
     display: inline-block;
-    width: 100px; /* Dostosuj szerokość etykiety według potrzeb */
-    margin-right: 10px; /* Dodaj odstęp między etykietami a polami wejściowymi */
+    width: 100px;
+    margin-right: 10px;
     margin-bottom: 8px;
     font-weight: bold;
 }
 
 .form input {
-    width: calc(100% - 120px); /* 100% szerokości minus szerokość etykiety i odstępu */
+    width: calc(100% - 120px);
     padding: 10px;
     margin-bottom: 16px;
     box-sizing: border-box;
@@ -35,7 +78,7 @@ body {
 }
 
 .form button {
-    background-color: #3498db;
+    background: linear-gradient(to bottom, #3b45f8, #549eee);
     color: #fff;
     padding: 12px 24px;
     border: none;
@@ -46,7 +89,43 @@ body {
 }
 
 .form button:hover {
-    background-color: #2d9ce5;
+    background-position: bottom;
+}
+
+.rating {
+    display: inline-block;
+    padding: 0 5px;
+    border-radius: 5px;
+    font-weight: bold;
+
+    color: whitesmoke;
+    box-shadow: 0.1px 1px 2px rgba(0, 0, 0, 0.4);
+    transition: background-color 0.3s ease;
+}
+
+.rating-scroll {
+    display: inline-block;
+    height: 20px;
+    overflow: hidden;
+    position: relative;
+    width: 25px;
+}
+
+.rating-scroll span {
+    display: block;
+    position: absolute;
+    top: 0;
+    animation: scroll 0.5s ease-in-out;
+}
+
+@keyframes scroll {
+    0% { top: 20px; }
+    100% { top: 0; }
+}
+
+.rating-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 .container {
@@ -111,7 +190,7 @@ button:hover {
 }
 
 .controls button {
-    background-color: #3498db;
+    background: linear-gradient(to bottom, #3b45f8, #549eee);
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -122,7 +201,7 @@ button:hover {
 }
 
 .controls button:hover {
-    background-color: #2980b9;
+    background-position: bottom;
 }
 
 .status-indicators {
@@ -220,7 +299,7 @@ button:hover {
     width: 50%;
     height: 50%;
     border: none;
-    background-color: #3498db;
+    background: linear-gradient(to bottom, #3b45f8, #549eee);
     color: #fff;
     font-size: 16px;
     cursor: pointer;
@@ -230,8 +309,6 @@ button:hover {
 
 .widget-button:hover {
     transform: scale(1.1);
-    translate: 1rem;
-    background-color: #3fa8ee;
 }
 
 .rotate-icon {
