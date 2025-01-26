@@ -10,6 +10,72 @@ body {
     justify-content: center;
 }
 
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-content p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.social-links {
+    margin-top: 10px;
+}
+
+.social-links a {
+    margin: 0 15px;
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.social-links a:hover {
+    color: transparent;
+    background: linear-gradient(to bottom, #3b45f8, #549eee);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.social-links i {
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover i {
+    background: linear-gradient(to bottom, #3b45f8, #549eee);
+    -webkit-background-clip: text;
+    background-clip: text;
+    transform: scale(1.1);
+    color: transparent;
+}
+
+.brand {
+    font-size: 14px;
+    color: #fff;
+}
+
+p a {
+    color: transparent;
+    background: linear-gradient(to bottom, #3b45f8, #549eee);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-decoration: none;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+    font-weight: bold;
+}
+
+p a:hover {
+    text-decoration: underline;
+    color: #3b45f8;
+}
+
 .manipulation-form {
     display: flex;
     flex-direction: column;
